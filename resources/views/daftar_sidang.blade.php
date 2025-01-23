@@ -13,8 +13,11 @@
     <div class="container mx-auto px-6 py-8">
         <!-- Tabel Sidang -->
         <div class="bg-white rounded-lg shadow">
-            <div class="px-6 py-4 border-b border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                 <h2 class="text-xl font-semibold text-gray-800">Jadwal Sidang</h2>
+                <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200">
+                    Tambah Jadwal
+                </a>
             </div>
             <div class="p-6">
                 <div class="overflow-x-auto">
