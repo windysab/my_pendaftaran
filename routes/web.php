@@ -13,3 +13,7 @@ Route::get('/gugatan/create', function () {
 Route::get('/layanan', function () {
     return view('layanan');
 })->name('layanan');
+
+Route::get('/permohonan/create', function () {
+    return view('permohonan.create');
+})->name('permohonan.create');
