@@ -8,7 +8,7 @@ Route::get('/', function () {
 
 Route::get('/gugatan/create', function () {
     return view('gugatan.create');
-});
+})->name('gugatan.create');
 
 Route::get('/layanan', function () {
     return view('layanan');
