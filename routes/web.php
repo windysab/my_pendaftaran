@@ -21,3 +21,7 @@ Route::get('/layanan', function () {
 Route::get('/permohonan/create', function () {
     return view('permohonan.create');
 })->name('permohonan.create');
+
+Route::get('/sidang', function () {
+    return view('daftar_sidang');
+})->name('sidang.index');
