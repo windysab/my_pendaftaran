@@ -10,6 +10,10 @@ Route::get('/gugatan/create', function () {
     return view('gugatan.create');
 })->name('gugatan.create');
 
+Route::get('/gugatan', function () {
+    return view('daftar_gugatan');
+})->name('gugatan.index');
+
 Route::get('/layanan', function () {
     return view('layanan');
 })->name('layanan');

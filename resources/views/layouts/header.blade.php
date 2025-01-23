@@ -18,6 +18,16 @@
                         Buat Gugatan
                     </a>
                 </li>
+                <li>
+                    <a href="/gugatan" class="text-white text-lg font-medium hover:text-yellow-300 transition duration-300 relative">
+                        Daftar Gugatan
+                    </a>
+                </li>
+                <li>
+                    <a href="/gugatan" class="text-white text-lg font-medium hover:text-yellow-300 transition duration-300 relative">
+                        Daftar Gugatan
+                    </a>
+                </li>
             </ul>
         </nav>
 
