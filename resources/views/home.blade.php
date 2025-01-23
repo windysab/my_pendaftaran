@@ -12,7 +12,7 @@
                 <p class="text-xl text-gray-600 mb-8">
                     Melayani dengan Integritas, Profesional, dan Berkeadilan
                 </p>
-                <a href="#layanan" class="bg-court-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-court-green-700 transition duration-300">
+                <a href="{{ route('layanan') }}" class="bg-court-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-court-green-700 transition duration-300">
                     Lihat Layanan Kami
                 </a>
             </div>
