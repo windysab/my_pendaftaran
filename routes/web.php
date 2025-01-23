@@ -12,4 +12,4 @@ Route::get('/gugatan/create', function () {
 
 Route::get('/layanan', function () {
     return view('layanan');
-});
+})->name('layanan');
