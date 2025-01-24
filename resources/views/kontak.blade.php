@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto px-6 py-16">
-    <h1 class="text-4xl font-extrabold text-center text-court-green-800 mb-12">Hubungi Kami</h1>
+    <h1 class="text-4xl font-extrabold text-center text-court-green-800 mb-12">PENGADILAN AGAMA AMUNTAI KELAS IB</h1>
     <div class="bg-gradient-to-r from-court-green-100 to-gray-50 p-8 rounded-lg shadow-xl">
         <div class="flex flex-col md:flex-row items-center">
             <!-- Gambar -->
@@ -11,13 +11,13 @@
                     <!-- Verify the image path and ensure the file exists -->
                     <img src="/assets/images/gedungamuntai.jpg" alt="Kantor Pengadilan"
                          class="rounded-lg border-4 border-gray-300 shadow-lg hover:scale-105 transition-transform duration-300">
-                    <div class="absolute top-0 left-0 w-full h-full rounded-lg bg-court-green-800 bg-opacity-10 hover:bg-opacity-30 transition-all duration-300"></div>
+                    {{-- <div class="absolute top-0 left-0 w-full h-full rounded-lg bg-court-green-800 bg-opacity-10 hover:bg-opacity-30 transition-all duration-300"></div> --}}
                 </div>
             </div>
 
             <!-- Informasi -->
             <div class="md:w-1/2 md:pl-12 mt-8 md:mt-0">
-                <div class="bg-white p-6 rounded-lg shadow-lg border">
+                 <div class="bg-white p-6 rounded-lg shadow-lg border text-center">
                     <ul class="space-y-4">
                         <li class="text-lg text-gray-700">
                             <span class="font-semibold text-court-green-800">Alamat:</span>
