@@ -15,6 +15,7 @@
             <p class="text-lg text-gray-700 mb-4">Fax: (0527)  63037</p>
             <p class="text-lg text-gray-700 mb-4">Email: pa.amuntai@gmail.com</p>
             <p class="text-lg text-gray-700 mb-4">Website: <a href="https://pa-amuntai.go.id" class="text-court-green-800">pa-amuntai.go.id</a></p>
+            <p class="text-lg text-gray-700 mb-4">Sistem Informasi Penelusuran Perkara: <a href="https://www.sipp.pa-amuntai.go.id" class="text-court-green-800">www.sipp.pa-amuntai.go.id</a></p>
             <p class="text-lg text-gray-700">Jam Operasional: Senin - Jumat, 08:00 - 16:00 WITA</p>
         </div>
     </div>
