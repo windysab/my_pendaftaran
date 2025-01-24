@@ -8,6 +8,7 @@
             <!-- Gambar -->
             <div class="md:w-1/2 flex justify-center relative">
                 <div class="relative">
+                    <!-- Verify the image path and ensure the file exists -->
                     <img src="/assets/images/gedungamuntai.jpg" alt="Kantor Pengadilan"
                          class="rounded-lg border-4 border-gray-300 shadow-lg hover:scale-105 transition-transform duration-300">
                     <div class="absolute top-0 left-0 w-full h-full rounded-lg bg-court-green-800 bg-opacity-10 hover:bg-opacity-30 transition-all duration-300"></div>
