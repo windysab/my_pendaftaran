@@ -10,7 +10,11 @@
         <div class="md:w-1/2 md:pl-12">
             <p class="text-lg text-gray-700 mb-4">Jl. Empu Mandastana No.10, Sungai Malang, Kec. Amuntai Tengah, Kabupaten Hulu Sungai Utara, Provinsi Kalimantan Selatan Kode Post 71418 </p>
             <p class="text-lg text-gray-700 mb-4">Telepon: (0527) 61002</p>
+            <p class="text-lg text-gray-700 mb-4">Layanan Informasi: 082149151132</p>
+            <p class="text-lg text-gray-700 mb-4">Layanan Pengaduan: 081345853988</p>
+            <p class="text-lg text-gray-700 mb-4">Fax: (0527)  63037</p>
             <p class="text-lg text-gray-700 mb-4">Email: pa.amuntai@gmail.com</p>
+            <p class="text-lg text-gray-700 mb-4">Website: <a href="https://pa-amuntai.go.id" class="text-court-green-800">pa-amuntai.go.id</a></p>
             <p class="text-lg text-gray-700">Jam Operasional: Senin - Jumat, 08:00 - 16:00 WITA</p>
         </div>
     </div>
