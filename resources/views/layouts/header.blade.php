@@ -35,7 +35,7 @@
 
         <!-- Search Bar -->
         <div class="relative">
-            <input type="text" placeholder="Search..." class="px-4 py-2 rounded-full text-gray-800">
+            <input type="text" placeholder="Cari informasi..."   class="w-full lg:w-64 px-4 py-2 rounded-full bg-white/10 text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-transparent transition-all duration-300">
             <button class="absolute right-0 top-0 mt-2 mr-4 text-gray-800">
                 <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
                     <path d="M10 2a8 8 0 105.293 14.707l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
