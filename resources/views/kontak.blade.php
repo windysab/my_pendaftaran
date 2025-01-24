@@ -49,7 +49,7 @@
                         </li>
                         <li class="text-lg text-gray-700">
                             <span class="font-semibold text-court-green-800">SIPP:</span>
-                            <a href="https://www.sipp.pa-amuntai.go.id" class="underline hover:text-court-green-600">www.sipp.pa-amuntai.go.id</a>
+                            <a href="https://sipp.pa-amuntai.go.id" class="underline hover:text-court-green-600">www.sipp.pa-amuntai.go.id</a>
                         </li>
                         <li class="text-lg text-gray-700">
                             <span class="font-semibold text-court-green-800">Jam Operasional:</span>
