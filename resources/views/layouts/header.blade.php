@@ -2,7 +2,7 @@
     <div class="container mx-auto flex justify-between items-center px-6">
         <!-- Logo Section -->
         <a href="/" class="flex items-center space-x-3">
-             <img src="/assets/images/Logo PA Amuntai - Trans.png" alt="Logo Pengadilan Agama" class="h-9 w-6"> <!-- Adjusted logo size to medium -->
+            <img src="/assets/images/Logo PA Amuntai - Trans.png" alt="Logo Pengadilan Agama" class="h-12 w-12"> <!-- Adjusted logo size to fit header -->
             <span class="text-white text-xl font-bold tracking-wide">Pengadilan Agama Amuntai</span>
         </a>
 
