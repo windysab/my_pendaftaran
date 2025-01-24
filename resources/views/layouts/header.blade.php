@@ -45,7 +45,7 @@
 
         <!-- Call-to-Action Button -->
         <div>
-            <a href="#" class="bg-yellow-400 text-gray-800 px-5 py-2 rounded-full shadow-lg font-semibold hover:bg-yellow-300 transition duration-300">Kontak Kami</a>
+            <a href="{{ route('kontak') }}" class="bg-yellow-400 text-gray-800 px-5 py-2 rounded-full shadow-lg font-semibold hover:bg-yellow-300 transition duration-300">Kontak Kami</a>
         </div>
     </div>
 </header>
