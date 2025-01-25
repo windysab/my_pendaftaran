@@ -42,8 +42,6 @@
                                             value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}"
                                             class="flyon-input mt-1 block w-full">
                                     </div>
-
-
                                     <div>
                                         <label for="binti_penggugat" class="block text-sm font-medium text-gray-700">Binti
                                             Penggugat</label>
