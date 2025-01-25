@@ -4,6 +4,7 @@ export default {
       "./resources/**/*.blade.php",
       "./resources/**/*.js",
       "./resources/**/*.vue",
+      './node_modules/flyonui/dist/js/*.js' // Tambahkan ini untuk mendukung FlyonUI JS
     ],
     theme: {
       extend: {
@@ -23,5 +24,8 @@ export default {
         },
       },
     },
-    plugins: [],
+    plugins: [
+      require('flyonui'),
+      require('flyonui/plugin'), // Tambahkan jika Anda menggunakan komponen JS FlyonUI
+    ],
   }
