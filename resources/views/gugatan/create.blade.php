@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-gradient-to-b from-court-green-50 to-white">
         <!-- Hero Section -->
-        <section class="py-20">
+        <section class="py-8"> <!-- Reduced padding from py-20 to py-16 -->
             <div class="container mx-auto px-6">
                 <div class="text-center">
                     <h1 class="text-4xl md:text-6xl font-bold text-court-green-800 mb-6">
@@ -17,7 +17,7 @@
         </section>
 
         <!-- Form Section -->
-        <section class="py-16">
+        <section class="py-0"> <!-- Reduced padding from py-4 to py-2 -->
             <div class="container mx-auto px-6">
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                     <div class="bg-gradient-to-r from-green-500 via-teal-400 to-blue-500 px-6 py-4">
@@ -42,7 +42,7 @@
                                             value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}"
                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">
                                     </div>
-                                    
+
 
                                     <div>
                                         <label for="binti_penggugat" class="block text-sm font-medium text-gray-700">Binti
