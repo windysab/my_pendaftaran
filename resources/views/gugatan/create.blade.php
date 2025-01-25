@@ -33,7 +33,7 @@
                             <div class="bg-court-green-600 px-4 py-3 rounded-t-lg">
                                 <h3 class="text-lg font-medium text-white">Data Penggugat/ Istri</h3>
                             </div>
-                            
+
                             <div class="p-4 space-y-4">
                                 <div>
                                     <label for="nama_penggugat" class="block text-sm font-medium text-gray-700">Nama Penggugat</label>
@@ -148,4 +148,5 @@
 @endsection
 
 <!-- Include FlyonUI JavaScript -->
-<script src="../path-to/flyonui.js"></script>
+{{-- <script src="../node_modules/flyonui/flyonui.js"></script> --}}
+<script src="../node_modules/flyonui/dist/js/accordion.js"></script>
