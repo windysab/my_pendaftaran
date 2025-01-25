@@ -37,24 +37,24 @@
                                     <div class="relative w-full">
                                         <input type="text" name="nama_penggugat" id="nama_penggugat"
                                             value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="nama_penggugat">Nama Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="text" name="binti_penggugat" id="binti_penggugat"
                                             value="{{ old('binti_penggugat', $gugatan->binti_penggugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="binti_penggugat">Binti Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="number" name="umur_penggugat" id="umur_penggugat"
                                             value="{{ old('umur_penggugat', $gugatan->umur_penggugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="umur_penggugat">Umur Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <select name="agama_penggugat" id="agama_penggugat"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                             <option value="islam"
                                                 {{ old('agama_penggugat', $gugatan->agama_penggugat ?? '') == 'islam' ? 'selected' : '' }}>
                                                 Islam</option>
@@ -76,12 +76,12 @@
                                     <div class="relative w-full">
                                         <input type="text" name="pekerjaan_penggugat" id="pekerjaan_penggugat"
                                             value="{{ old('pekerjaan_penggugat', $gugatan->pekerjaan_penggugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="pekerjaan_penggugat">Pekerjaan Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <select name="pendidikan_penggugat" id="pendidikan_penggugat"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                             <option value="Tidak Tamat SD"
                                                 {{ old('pendidikan_penggugat', $gugatan->pendidikan_penggugat ?? '') == 'Tidak Tamat SD' ? 'selected' : '' }}>
                                                 Tidak Tamat SD</option>
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="relative w-full">
                                         <textarea name="alamat_penggugat" id="alamat_penggugat" readonly onclick="openPenggugatAddressModal()"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_penggugat', $gugatan->alamat_penggugat ?? '') }}</textarea>
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_penggugat', $gugatan->alamat_penggugat ?? '') }}</textarea>
                                         <label class="input-floating-label" for="alamat_penggugat">Alamat Lengkap</label>
                                     </div>
                                 </div>
@@ -126,24 +126,24 @@
                                     <div class="relative w-full">
                                         <input type="text" name="nama_tergugat" id="nama_tergugat"
                                             value="{{ old('nama_tergugat', $gugatan->nama_tergugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="nama_tergugat">Nama Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="text" name="bin_tergugat" id="bin_tergugat"
                                             value="{{ old('bin_tergugat', $gugatan->bin_tergugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="bin_tergugat">Bin Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="number" name="umur_tergugat" id="umur_tergugat"
                                             value="{{ old('umur_tergugat', $gugatan->umur_tergugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="umur_tergugat">Umur Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <select name="agama_tergugat" id="agama_tergugat"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                             <option value="islam"
                                                 {{ old('agama_tergugat', $gugatan->agama_tergugat ?? '') == 'islam' ? 'selected' : '' }}>
                                                 Islam</option>
@@ -165,12 +165,12 @@
                                     <div class="relative w-full">
                                         <input type="text" name="pekerjaan_tergugat" id="pekerjaan_tergugat"
                                             value="{{ old('pekerjaan_tergugat', $gugatan->pekerjaan_tergugat ?? '') }}"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                         <label class="input-floating-label" for="pekerjaan_tergugat">Pekerjaan Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <select name="pendidikan_tergugat" id="pendidikan_tergugat"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
                                             <option value="Tidak Tamat SD"
                                                 {{ old('pendidikan_tergugat', $gugatan->pendidikan_tergugat ?? '') == 'Tidak Tamat SD' ? 'selected' : '' }}>
                                                 Tidak Tamat SD</option>
@@ -200,7 +200,7 @@
                                     </div>
                                     <div class="relative w-full">
                                         <textarea name="alamat_tergugat" id="alamat_tergugat" readonly onclick="openAddressModal()"
-                                            class="input input-floating peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_tergugat', $gugatan->alamat_tergugat ?? '') }}</textarea>
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_tergugat', $gugatan->alamat_tergugat ?? '') }}</textarea>
                                         <label class="input-floating-label" for="alamat_tergugat">Alamat Lengkap</label>
                                     </div>
                                 </div>
