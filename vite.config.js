@@ -6,6 +6,13 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
+            valetTls: false, // Nonaktifkan Valet TLS
         }),
     ],
+    server: {
+        host: '127.0.0.1',
+        port: 5173,
+        strictPort: true,
+    },
 });
+
