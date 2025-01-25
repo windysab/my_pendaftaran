@@ -111,8 +111,8 @@
                                     </div>
                                     <div class="relative w-full">
                                         <textarea name="alamat_penggugat" id="alamat_penggugat" readonly onclick="openPenggugatAddressModal()"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_penggugat', $gugatan->alamat_penggugat ?? '') }}</textarea>
-                                        <label class="input-floating-label" for="alamat_penggugat">Alamat Lengkap</label>
+                                            class="textarea textarea-floating is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_penggugat', $gugatan->alamat_penggugat ?? '') }}</textarea>
+                                        <label class="textarea-floating-label" for="alamat_penggugat">Alamat Lengkap</label>
                                     </div>
                                 </div>
                             </div>
@@ -200,8 +200,8 @@
                                     </div>
                                     <div class="relative w-full">
                                         <textarea name="alamat_tergugat" id="alamat_tergugat" readonly onclick="openAddressModal()"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_tergugat', $gugatan->alamat_tergugat ?? '') }}</textarea>
-                                        <label class="input-floating-label" for="alamat_tergugat">Alamat Lengkap</label>
+                                            class="textarea textarea-floating is-valid peer mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">{{ old('alamat_tergugat', $gugatan->alamat_tergugat ?? '') }}</textarea>
+                                        <label class="textarea-floating-label" for="alamat_tergugat">Alamat Lengkap</label>
                                     </div>
                                 </div>
                             </div>
