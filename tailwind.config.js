@@ -5,6 +5,7 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         './node_modules/flyonui/dist/js/*.js',
+        './node_modules/flyonui/dist/js/accordion.js', 
     ],
     theme: {
         extend: {
