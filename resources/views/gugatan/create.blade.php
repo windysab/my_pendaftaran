@@ -53,9 +53,6 @@
                                         <label class="input-floating-label" for="umur_penggugat">Umur Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
-                                        <div class="label justify-end">
-                                            <span class="label-text-alt">Top Right label</span>
-                                        </div>
                                         <div class="relative">
                                             <select name="agama_penggugat" id="agama_penggugat"
                                                 class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
@@ -77,10 +74,6 @@
                                             </select>
                                             <label class="select-floating-label" for="agama_penggugat">Agama Penggugat</label>
                                         </div>
-                                        <div class="label">
-                                            <span class="label-text-alt">Bottom Left label</span>
-                                            <span class="label-text-alt">Bottom Right label</span>
-                                        </div>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="text" name="pekerjaan_penggugat" id="pekerjaan_penggugat"
@@ -89,9 +82,6 @@
                                         <label class="input-floating-label" for="pekerjaan_penggugat">Pekerjaan Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
-                                        <div class="label justify-end">
-                                            <span class="label-text-alt">Top Right label</span>
-                                        </div>
                                         <div class="relative">
                                             <select name="pendidikan_penggugat" id="pendidikan_penggugat"
                                                 class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
@@ -121,10 +111,6 @@
                                                     S1</option>
                                             </select>
                                             <label class="select-floating-label" for="pendidikan_penggugat">Pendidikan Penggugat</label>
-                                        </div>
-                                        <div class="label">
-                                            <span class="label-text-alt">Bottom Left label</span>
-                                            <span class="label-text-alt">Bottom Right label</span>
                                         </div>
                                     </div>
                                     <div class="relative w-full">
@@ -160,9 +146,6 @@
                                         <label class="input-floating-label" for="umur_tergugat">Umur Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
-                                        <div class="label justify-end">
-                                            <span class="label-text-alt">Top Right label</span>
-                                        </div>
                                         <div class="relative">
                                             <select name="agama_tergugat" id="agama_tergugat"
                                                 class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
@@ -184,10 +167,6 @@
                                             </select>
                                             <label class="select-floating-label" for="agama_tergugat">Agama Tergugat</label>
                                         </div>
-                                        <div class="label">
-                                            <span class="label-text-alt">Bottom Left label</span>
-                                            <span class="label-text-alt">Bottom Right label</span>
-                                        </div>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="text" name="pekerjaan_tergugat" id="pekerjaan_tergugat"
@@ -196,9 +175,6 @@
                                         <label class="input-floating-label" for="pekerjaan_tergugat">Pekerjaan Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
-                                        <div class="label justify-end">
-                                            <span class="label-text-alt">Top Right label</span>
-                                        </div>
                                         <div class="relative">
                                             <select name="pendidikan_tergugat" id="pendidikan_tergugat"
                                                 class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
@@ -228,10 +204,6 @@
                                                     S1</option>
                                             </select>
                                             <label class="select-floating-label" for="pendidikan_tergugat">Pendidikan Tergugat</label>
-                                        </div>
-                                        <div class="label">
-                                            <span class="label-text-alt">Bottom Left label</span>
-                                            <span class="label-text-alt">Bottom Right label</span>
                                         </div>
                                     </div>
                                     <div class="relative w-full">
