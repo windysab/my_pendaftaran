@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pengadilan Agama Amuntai</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    {{-- <link rel="stylesheet" href="../node_modules/flyonui/flyonui.css">
-    <link rel="stylesheet" href="../node_modules/flyonui/dist/css/accordion.css">
-    <link rel="stylesheet" href="../node_modules/flyonui/dist/css/tabs.css"> --}}
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
