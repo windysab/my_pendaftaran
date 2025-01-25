@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pengadilan Agama Amuntai</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="font-inter">
     @include('layouts.header')
@@ -31,5 +31,6 @@
             </div>
         </div>
     </footer>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

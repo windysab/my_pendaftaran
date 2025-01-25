@@ -6,6 +6,12 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
+            valetTls: false,
         }),
     ],
+    server: {
+        host: '127.0.0.1',
+        port: 3000,
+        strictPort: true,
+    },
 });
