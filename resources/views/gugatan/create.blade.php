@@ -40,7 +40,7 @@
                                             Penggugat</label>
                                         <input type="text" name="nama_penggugat" id="nama_penggugat"
                                             value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">
+                                            class="flyon-input mt-1 block w-full">
                                     </div>
 
 
@@ -122,7 +122,7 @@
                                         <label for="alamat_penggugat" class="block text-sm font-medium text-gray-700">Alamat
                                             Lengkap</label>
                                         <textarea name="alamat_penggugat" id="alamat_penggugat" readonly onclick="openPenggugatAddressModal()"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">{{ old('alamat_penggugat', $gugatan->alamat_penggugat ?? '') }}</textarea>
+                                            class="flyon-textarea mt-1 block w-full">{{ old('alamat_penggugat', $gugatan->alamat_penggugat ?? '') }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                                             Tergugat</label>
                                         <input type="text" name="nama_tergugat" id="nama_tergugat"
                                             value="{{ old('nama_tergugat', $gugatan->nama_tergugat ?? '') }}"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">
+                                            class="flyon-input mt-1 block w-full">
                                     </div>
                                     <div>
                                         <label for="bin_tergugat" class="block text-sm font-medium text-gray-700">Bin
@@ -218,7 +218,7 @@
                                         <label for="alamat_tergugat"
                                             class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
                                         <textarea name="alamat_tergugat" id="alamat_tergugat" readonly onclick="openAddressModal()"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">{{ old('alamat_tergugat', $gugatan->alamat_tergugat ?? '') }}</textarea>
+                                            class="flyon-textarea mt-1 block w-full">{{ old('alamat_tergugat', $gugatan->alamat_tergugat ?? '') }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -238,5 +238,4 @@
 @endsection
 
 <!-- Include FlyonUI JavaScript -->
-{{-- <script src="../node_modules/flyonui/flyonui.js"></script> --}}
 <script src="../node_modules/flyonui/dist/js/accordion.js"></script>
