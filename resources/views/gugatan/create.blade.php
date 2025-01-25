@@ -39,6 +39,14 @@
                                     <label for="nama_penggugat" class="block text-sm font-medium text-gray-700">Nama Penggugat</label>
                                     <input type="text" name="nama_penggugat" id="nama_penggugat" value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">
                                 </div>
+                                <div class="flex items-center gap-2 max-sm:flex-wrap">
+                                    <div class="avatar">
+                                      <div class="size-14 rounded-full">
+                                        <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-1.png" alt="Avatar" />
+                                      </div>
+                                    </div>
+                                    <input type="file" class="file:btn file:btn-primary block text-sm file:me-3 file:rounded-full file:uppercase" aria-label="file-input" />
+                                  </div>
 
                                 <div>
                                     <label for="binti_penggugat" class="block text-sm font-medium text-gray-700">Binti Penggugat</label>

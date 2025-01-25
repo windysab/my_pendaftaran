@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pengadilan Agama Amuntai</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @vite('resources/css/app.css')
 
 </head>
+
 <body class="font-inter">
     @include('layouts.header')
 
@@ -36,4 +39,5 @@
     <script src="../node_modules/flyonui/flyonui.js"></script>
     <script src="../node_modules/flyonui/dist/js/accordion.js"></script>
 </body>
+
 </html>
