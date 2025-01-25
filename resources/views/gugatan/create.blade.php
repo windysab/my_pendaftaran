@@ -24,7 +24,8 @@
                     <h2 class="text-xl font-semibold text-white">Formulir Gugatan</h2>
                 </div>
 
-                <form method="POST" action="{{ isset($gugatan) ? route('gugatan.update.form', $gugatan->id) : route('gugatan.page2.store') }}" onsubmit="validateForm(event)" id="gugatanForm" class="p-6">
+                {{-- <form method="POST" action="{{ isset($gugatan) ? route('gugatan.update.form', $gugatan->id) : route('gugatan.page2.store') }}" onsubmit="validateForm(event)" id="gugatanForm" class="p-6"> --}}
+                    <form method="POST" action="" onsubmit="validateForm(event)" id="gugatanForm" class="p-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Data Penggugat -->
