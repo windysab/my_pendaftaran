@@ -24,7 +24,8 @@
                     <h2 class="text-xl font-semibold text-white">Formulir Gugatan</h2>
                 </div>
 
-                <form method="POST" action="{{ isset($gugatan) ? route('gugatan.update.form', $gugatan->id) : route('gugatan.page2.store') }}" onsubmit="validateForm(event)" id="gugatanForm" class="p-6">
+                {{-- <form method="POST" action="{{ isset($gugatan) ? route('gugatan.update.form', $gugatan->id) : route('gugatan.page2.store') }}" onsubmit="validateForm(event)" id="gugatanForm" class="p-6"> --}}
+                    <form method="POST" action="" onsubmit="validateForm(event)" id="gugatanForm" class="p-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Data Penggugat -->
@@ -32,11 +33,13 @@
                             <div class="bg-court-green-600 px-4 py-3 rounded-t-lg">
                                 <h3 class="text-lg font-medium text-white">Data Penggugat/ Istri</h3>
                             </div>
+                            
                             <div class="p-4 space-y-4">
                                 <div>
                                     <label for="nama_penggugat" class="block text-sm font-medium text-gray-700">Nama Penggugat</label>
                                     <input type="text" name="nama_penggugat" id="nama_penggugat" value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">
                                 </div>
+
                                 <div>
                                     <label for="binti_penggugat" class="block text-sm font-medium text-gray-700">Binti Penggugat</label>
                                     <input type="text" name="binti_penggugat" id="binti_penggugat" value="{{ old('binti_penggugat', $gugatan->binti_penggugat ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-court-green-500 focus:ring-court-green-500 sm:text-sm">
@@ -143,3 +146,6 @@
     </section>
 </div>
 @endsection
+
+<!-- Include FlyonUI JavaScript -->
+<script src="../path-to/flyonui.js"></script>

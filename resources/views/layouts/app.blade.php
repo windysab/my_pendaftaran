@@ -33,5 +33,6 @@
             </div>
         </div>
     </footer>
+    <script src="../node_modules/flyonui/flyonui.js"></script>
 </body>
 </html>
