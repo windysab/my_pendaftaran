@@ -37,19 +37,19 @@
                                     <div class="relative w-full">
                                         <input type="text" name="nama_penggugat" id="nama_penggugat"
                                             value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="nama_penggugat">Nama Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="text" name="binti_penggugat" id="binti_penggugat"
                                             value="{{ old('binti_penggugat', $gugatan->binti_penggugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="binti_penggugat">Binti Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="number" name="umur_penggugat" id="umur_penggugat"
                                             value="{{ old('umur_penggugat', $gugatan->umur_penggugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="umur_penggugat">Umur Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
@@ -78,7 +78,7 @@
                                     <div class="relative w-full">
                                         <input type="text" name="pekerjaan_penggugat" id="pekerjaan_penggugat"
                                             value="{{ old('pekerjaan_penggugat', $gugatan->pekerjaan_penggugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="pekerjaan_penggugat">Pekerjaan Penggugat</label>
                                     </div>
                                     <div class="relative w-full">
@@ -130,19 +130,19 @@
                                     <div class="relative w-full">
                                         <input type="text" name="nama_tergugat" id="nama_tergugat"
                                             value="{{ old('nama_tergugat', $gugatan->nama_tergugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="nama_tergugat">Nama Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="text" name="bin_tergugat" id="bin_tergugat"
                                             value="{{ old('bin_tergugat', $gugatan->bin_tergugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="bin_tergugat">Bin Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
                                         <input type="number" name="umur_tergugat" id="umur_tergugat"
                                             value="{{ old('umur_tergugat', $gugatan->umur_tergugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="umur_tergugat">Umur Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
@@ -171,7 +171,7 @@
                                     <div class="relative w-full">
                                         <input type="text" name="pekerjaan_tergugat" id="pekerjaan_tergugat"
                                             value="{{ old('pekerjaan_tergugat', $gugatan->pekerjaan_tergugat ?? '') }}"
-                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                            class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                         <label class="input-floating-label" for="pekerjaan_tergugat">Pekerjaan Tergugat</label>
                                     </div>
                                     <div class="relative w-full">
