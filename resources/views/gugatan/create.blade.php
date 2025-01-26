@@ -55,7 +55,7 @@
                                     <div class="relative w-full">
                                         <div class="relative">
                                             <select name="agama_penggugat" id="agama_penggugat"
-                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                                 <option value="islam"
                                                     {{ old('agama_penggugat', $gugatan->agama_penggugat ?? '') == 'islam' ? 'selected' : '' }}>
                                                     Islam</option>
@@ -84,7 +84,7 @@
                                     <div class="relative w-full">
                                         <div class="relative">
                                             <select name="pendidikan_penggugat" id="pendidikan_penggugat"
-                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                                 <option value="Tidak Tamat SD"
                                                     {{ old('pendidikan_penggugat', $gugatan->pendidikan_penggugat ?? '') == 'Tidak Tamat SD' ? 'selected' : '' }}>
                                                     Tidak Tamat SD</option>
@@ -148,7 +148,7 @@
                                     <div class="relative w-full">
                                         <div class="relative">
                                             <select name="agama_tergugat" id="agama_tergugat"
-                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                                 <option value="islam"
                                                     {{ old('agama_tergugat', $gugatan->agama_tergugat ?? '') == 'islam' ? 'selected' : '' }}>
                                                     Islam</option>
@@ -177,7 +177,7 @@
                                     <div class="relative w-full">
                                         <div class="relative">
                                             <select name="pendidikan_tergugat" id="pendidikan_tergugat"
-                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white">
+                                                class="select is-valid select-floating mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black">
                                                 <option value="Tidak Tamat SD"
                                                     {{ old('pendidikan_tergugat', $gugatan->pendidikan_tergugat ?? '') == 'Tidak Tamat SD' ? 'selected' : '' }}>
                                                     Tidak Tamat SD</option>
