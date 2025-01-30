@@ -33,3 +33,12 @@ Route::get('/kontak', function () {
 Route::post('/gugatan/page2', function () {
     return view('gugatan.gugatan-page2');
 })->name('gugatan.page2');
+
+Route::post('/gugatan/page3', function () {
+    return view('gugatan.gugatan-page3');
+})->name('gugatan.page3');
+
+Route::post('/gugatan/store', function () {
+    // Logic to store the data
+    return redirect()->route('gugatan.index');
+})->name('gugatan.store');

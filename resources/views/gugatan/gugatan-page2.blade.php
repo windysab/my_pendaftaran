@@ -26,7 +26,7 @@
                     <h2 class="text-xl font-semibold text-white">Detail Pernikahan & Tempat Tinggal</h2>
                 </div>
 
-                <form method="POST" action="" class="p-6">
+                <form method="POST" action="{{ route('gugatan.page3') }}" class="p-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Detail Pernikahan -->
