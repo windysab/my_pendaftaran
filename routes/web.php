@@ -29,3 +29,7 @@ Route::get('/sidang', function () {
 Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');
+
+Route::post('/gugatan/page2', function () {
+    return view('gugatan.gugatan-page2');
+})->name('gugatan.page2');

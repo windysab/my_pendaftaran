@@ -26,7 +26,7 @@
                     <h2 class="text-xl font-semibold text-white">Formulir Gugatan</h2>
                 </div>
 
-                <form method="POST" action="" onsubmit="validateForm(event)" id="gugatanForm" class="p-6">
+                <form method="POST" action="{{ route('gugatan.page2') }}" onsubmit="validateForm(event)" id="gugatanForm" class="p-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Data Penggugat -->
@@ -203,7 +203,7 @@
                                     <input type="number" id="no" class="form-control" placeholder="No Rumah">
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md2">
                                 <div class="form-group">
                                     <label for="rt"><b>RT</b></label>
                                     <input type="number" id="rt" class="form-control" placeholder="RT">
