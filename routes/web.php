@@ -42,3 +42,7 @@ Route::post('/gugatan/store', function () {
     // Logic to store the data
     return redirect()->route('gugatan.index');
 })->name('gugatan.store');
+
+Route::get('/gugatan/sukses', function () {
+    return view('gugatan.gugatan-sukses');
+})->name('gugatan.sukses');
