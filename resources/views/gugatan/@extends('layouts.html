@@ -1,0 +1,282 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="bg-gradient-to-b from-court-green-50 to-white min-h-screen">
+    <!-- Hero Section -->
+    <section class="pt-12 pb-8">
+        <div class="container mx-auto px-4 lg:px-0">
+            <div class="text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-court-green-800 mb-4">
+                    Buat Gugatan Baru
+                </h1>
+                <div class="w-20 h-1 bg-court-green-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Lengkapi formulir berikut dengan data yang valid untuk mengajukan gugatan baru.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="pb-12">
+        <div class="container mx-auto px-4 lg:px-0">
+            <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+                <!-- Form Header -->
+                <div class="bg-gradient-to-r from-court-green-600 to-court-green-500 px-8 py-6">
+                    <h2 class="text-2xl font-semibold text-white flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        FORMULIR GUGATAN
+                    </h2>
+                </div>
+
+                <form method="POST" action="" onsubmit="validateForm(event)" id="gugatanForm" class="p-8">
+                    @csrf
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Penggugat Section -->
+                        <div class="space-y-6">
+                            <div class="bg-court-green-50 p-6 rounded-xl">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="bg-court-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white font-medium">1</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-court-green-800">Data Penggugat</h3>
+                                </div>
+
+                                <!-- Form Fields -->
+                                <div class="space-y-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Nama Lengkap</label>
+                                        <input type="text" name="nama_penggugat" class="form-input"
+                                            value="{{ old('nama_penggugat', $gugatan->nama_penggugat ?? '') }}"
+                                            placeholder="Masukkan nama lengkap">
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Umur</label>
+                                            <input type="number" name="umur_penggugat" class="form-input"
+                                                value="{{ old('umur_penggugat', $gugatan->umur_penggugat ?? '') }}"
+                                                placeholder="Masukkan umur">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Agama</label>
+                                            <select name="agama_penggugat" class="form-select">
+                                                @foreach(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha'] as $agama)
+                                                <option value="{{ strtolower($agama) }}" {{
+                                                    old('agama_penggugat')==strtolower($agama) ? 'selected' : '' }}>
+                                                    {{ $agama }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Alamat Lengkap</label>
+                                        <div class="relative">
+                                            <textarea name="alamat_penggugat" class="form-textarea pr-10" readonly
+                                                onclick="openPenggugatAddressModal()"
+                                                placeholder="Klik untuk memilih alamat">{{ old('alamat_penggugat', $gugatan->alamat_penggugat ?? '') }}</textarea>
+                                            <button type="button" onclick="openPenggugatAddressModal()"
+                                                class="absolute right-3 bottom-3 text-court-green-600 hover:text-court-green-700">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tergugat Section -->
+                        <div class="space-y-6">
+                            <div class="bg-court-green-50 p-6 rounded-xl">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="bg-court-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white font-medium">2</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-court-green-800">Data Tergugat</h3>
+                                </div>
+
+                                <!-- Form Fields -->
+                                <div class="space-y-4">
+                                    <div class="form-group">
+                                        <label class="form-label">Nama Lengkap</label>
+                                        <input type="text" name="nama_tergugat" class="form-input"
+                                            value="{{ old('nama_tergugat', $gugatan->nama_tergugat ?? '') }}"
+                                            placeholder="Masukkan nama lengkap">
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Umur</label>
+                                            <input type="number" name="umur_tergugat" class="form-input"
+                                                value="{{ old('umur_tergugat', $gugatan->umur_tergugat ?? '') }}"
+                                                placeholder="Masukkan umur">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Agama</label>
+                                            <select name="agama_tergugat" class="form-select">
+                                                @foreach(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha'] as $agama)
+                                                <option value="{{ strtolower($agama) }}" {{
+                                                    old('agama_tergugat')==strtolower($agama) ? 'selected' : '' }}>
+                                                    {{ $agama }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Alamat Lengkap</label>
+                                        <div class="relative">
+                                            <textarea name="alamat_tergugat" class="form-textarea pr-10" readonly
+                                                onclick="openAddressModal()"
+                                                placeholder="Klik untuk memilih alamat">{{ old('alamat_tergugat', $gugatan->alamat_tergugat ?? '') }}</textarea>
+                                            <button type="button" onclick="openAddressModal()"
+                                                class="absolute right-3 bottom-3 text-court-green-600 hover:text-court-green-700">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Footer -->
+                    <div class="mt-12 text-center">
+                        <button type="submit"
+                            class="bg-court-green-600 hover:bg-court-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center mx-auto">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            Lanjutkan Pengajuan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Address Modal -->
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+    id="addressModal" tabindex="-1">
+    <div class="modal-dialog relative w-auto pointer-events-none">
+        <div
+            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-2xl outline-none">
+            <div class="modal-header bg-court-green-600 p-6 rounded-t-2xl">
+                <h5 class="text-xl font-semibold text-white">Pilih Alamat</h5>
+                <button type="button" class="btn-close" onclick="closeAddressModal()">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body p-6">
+                <div class="space-y-4">
+                    <div class="form-group">
+                        <label class="form-label">Kabupaten/Kota</label>
+                        <div class="relative">
+                            <input type="text" id="kabupatenSearch" class="form-input" placeholder="Cari kabupaten...">
+                            <div id="kabupatenSuggestions"
+                                class="absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kecamatan</label>
+                        <select id="kecamatanSelect" class="form-select" disabled>
+                            <option value="">Pilih Kecamatan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Desa/Kelurahan</label>
+                        <select id="desaSelect" class="form-select" disabled>
+                            <option value="">Pilih Desa</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-gray-50 p-6 rounded-b-2xl">
+                <button type="button" onclick="saveAddress()"
+                    class="bg-court-green-600 hover:bg-court-green-700 text-white px-6 py-2 rounded-lg transition-colors duration-200">
+                    Simpan Alamat
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-label {
+        @apply block text-sm font-medium text-gray-700 mb-1;
+    }
+
+    .form-input {
+        @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-court-green-500 focus:ring-2 focus:ring-court-green-200 text-gray-700 transition-all duration-300;
+    }
+
+    .form-select {
+        @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-court-green-500 focus:ring-2 focus:ring-court-green-200 text-gray-700 bg-white pr-8 appearance-none transition-all duration-300;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a5568'%3e%3cpath d='M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.5em;
+    }
+
+    .form-textarea {
+        @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-court-green-500 focus:ring-2 focus:ring-court-green-200 text-gray-700 transition-all duration-300 resize-none;
+    }
+
+    #kabupatenSuggestions {
+        @apply hidden;
+    }
+
+    .suggestion-item {
+        @apply px-4 py-2.5 hover:bg-gray-100 cursor-pointer transition-colors duration-200 text-sm;
+    }
+
+    .modal {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+</style>
+
+<script>
+    // JavaScript for handling address selection
+    let currentAddressField = null;
+
+    function openAddressModal(fieldId) {
+        currentAddressField = 'tergugat';
+        new bootstrap.Modal(document.getElementById('addressModal')).show();
+    }
+
+    function openPenggugatAddressModal() {
+        currentAddressField = 'penggugat';
+        new bootstrap.Modal(document.getElementById('addressModal')).show();
+    }
+
+    function closeAddressModal() {
+        document.getElementById('addressModal').classList.add('hidden');
+    }
+
+    // Rest of your existing JavaScript logic...
+</script>
+@endsection
