@@ -26,21 +26,15 @@ class IndoregionController extends Controller
 
     public function getKecamatan($kabupatenId)
     {
-        return District::where('regency_id', $kabupatenId)->get();
+        $kecamatan = District::where('regency_id', $kabupatenId)->get();
+        Log::info('Kecamatan data:', $kecamatan->toArray());
+        return response()->json($kecamatan);
     }
-
-    // public function getDesa($kecamatanId)
-    // {
-    //     return Village::where('district_id', $kecamatanId)->get();
-    // }
-
 
     public function getDesa($kecamatanId)
     {
-
         $desa = Village::where('district_id', $kecamatanId)->get();
-
-
+        Log::info('Desa data:', $desa->toArray());
         return response()->json($desa);
     }
 }
