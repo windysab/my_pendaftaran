@@ -15,7 +15,8 @@ use App\Http\Controllers\IndoregionController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+// Hapus sementara middleware 'auth:sanctum' untuk pengujian
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
