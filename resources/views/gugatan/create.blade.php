@@ -408,8 +408,7 @@
 <script>
     $(document).ready(function() {
         fetchSuggestions('#kabupaten_penggugat', '#kabupaten_penggugat_suggestions', '/api/kabupaten/search');
-        handleSuggestionClick('#kabupaten_penggugat_suggestions', '#kabupaten_penggugat',
-            '#kecamatan_penggugat', '/api/kecamatan/');
+        handleSuggestionClick('#kabupaten_penggugat_suggestions', '#kabupaten_penggugat', '#kecamatan_penggugat', '/api/kecamatan/');
         handleDropdownChange('#kecamatan_penggugat', '#desa_penggugat', '/api/desa/');
 
         fetchSuggestions('#kabupaten', '#kabupaten_suggestions', '/api/kabupaten/search');
@@ -427,12 +426,10 @@
                     console.log('Suggestions data:', data); // Tambahkan logging
                     $(suggestionsSelector).empty();
                     data.forEach(function(item) {
-                        $(suggestionsSelector).append(
-                            `<a href="#" class="list-group-item list-group-item-action suggestion-item" data-id="${item.id}" data-name="${item.name}">${item.name}</a>`
-                        );
+                        $(suggestionsSelector).append(`<a href="#" class="list-group-item list-group-item-action suggestion-item" data-id="${item.id}" data-name="${item.name}">${item.name}</a>`);
                     });
                 }).fail(function() {
-                    // Handle error
+                    console.error('Error fetching suggestions:', arguments); // Tambahkan logging
                 });
             } else {
                 $(suggestionsSelector).empty();
@@ -455,6 +452,8 @@
                 $(nextSelector).append(data.map(function(item) {
                     return `<option value="${item.id}" data-id="${item.id}">${item.name}</option>`;
                 }));
+            }).fail(function() {
+                console.error('Error fetching next dropdown data:', arguments); // Tambahkan logging
             });
         });
     }
@@ -469,7 +468,7 @@
                     return `<option value="${item.id}">${item.name}</option>`;
                 }));
             }).fail(function() {
-                // Handle error
+                console.error('Error fetching next dropdown data:', arguments); // Tambahkan logging
             });
         });
     }

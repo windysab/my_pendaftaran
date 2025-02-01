@@ -23,3 +23,7 @@ Route::get('/kabupaten/search', [IndoregionController::class, 'searchKabupaten']
 Route::get('/kabupaten', [IndoregionController::class, 'getKabupaten']);
 Route::get('/kecamatan/{kabupatenId}', [IndoregionController::class, 'getKecamatan']);
 Route::get('/desa/{kecamatanId}', [IndoregionController::class, 'getDesa']);
+
+Route::get('/test', function () {
+    return response()->json(['message' => 'API is working']);
+});
