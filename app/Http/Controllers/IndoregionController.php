@@ -8,7 +8,6 @@ use App\Models\District;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-
 class IndoregionController extends Controller
 {
     public function searchKabupaten(Request $request)
@@ -17,11 +16,12 @@ class IndoregionController extends Controller
         $kabupaten = Regency::where('name', 'LIKE', "%{$query}%")->get(['id', 'name']);
         return response()->json($kabupaten);
     }
+
     public function getKabupaten()
     {
-        return Regency::all();
-        // Log::info('Kabupaten data:', $kabupaten->toArray());
-        return $kabupaten;
+        $kabupaten = Regency::all();
+        Log::info('Kabupaten data:', $kabupaten->toArray());
+        return response()->json($kabupaten);
     }
 
     public function getKecamatan($kabupatenId)
