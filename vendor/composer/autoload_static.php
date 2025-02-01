@@ -27,6 +27,7 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        '7f6e3de7af83a54fa34e8222e98ec3eb' => __DIR__ . '/..' . '/azishapidin/indoregion/src/RawDataGetter.php',
         '476ca15b8d69b04665cd879be9cb4c68' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/functions.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
@@ -107,6 +108,7 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
             'PhpOption\\' => 10,
             'PhpOffice\\PhpWord\\' => 18,
             'PhpOffice\\Math\\' => 15,
+            'ParseCsv\\' => 9,
         ),
         'N' => 
         array (
@@ -175,6 +177,7 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
         ),
         'A' => 
         array (
+            'AzisHapidin\\IndoRegion\\' => 23,
             'App\\' => 4,
         ),
     );
@@ -373,6 +376,10 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
         array (
             0 => __DIR__ . '/..' . '/phpoffice/math/src/Math',
         ),
+        'ParseCsv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/parsecsv/php-parsecsv/src',
+        ),
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
@@ -518,6 +525,10 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'AzisHapidin\\IndoRegion\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/azishapidin/indoregion/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -528,10 +539,22 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
     public static $classMap = array (
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\GugatanController' => __DIR__ . '/../..' . '/app/Http/Controllers/GugatanController.php',
+        'App\\Models\\District' => __DIR__ . '/../..' . '/app/Models/District.php',
         'App\\Models\\Gugatan' => __DIR__ . '/../..' . '/app/Models/Gugatan.php',
+        'App\\Models\\Province' => __DIR__ . '/../..' . '/app/Models/Province.php',
+        'App\\Models\\Regency' => __DIR__ . '/../..' . '/app/Models/Regency.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\Village' => __DIR__ . '/../..' . '/app/Models/Village.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'AzisHapidin\\IndoRegion\\IndoRegion' => __DIR__ . '/..' . '/azishapidin/indoregion/src/IndoRegion.php',
+        'AzisHapidin\\IndoRegion\\IndoRegionPublishCommand' => __DIR__ . '/..' . '/azishapidin/indoregion/src/IndoRegionPublishCommand.php',
+        'AzisHapidin\\IndoRegion\\IndoRegionServiceProvider' => __DIR__ . '/..' . '/azishapidin/indoregion/src/IndoRegionServiceProvider.php',
+        'AzisHapidin\\IndoRegion\\RawDataGetter' => __DIR__ . '/..' . '/azishapidin/indoregion/src/RawDataGetter.php',
+        'AzisHapidin\\IndoRegion\\Traits\\DistrictTrait' => __DIR__ . '/..' . '/azishapidin/indoregion/src/Traits/DistrictTrait.php',
+        'AzisHapidin\\IndoRegion\\Traits\\ProvinceTrait' => __DIR__ . '/..' . '/azishapidin/indoregion/src/Traits/ProvinceTrait.php',
+        'AzisHapidin\\IndoRegion\\Traits\\RegencyTrait' => __DIR__ . '/..' . '/azishapidin/indoregion/src/Traits/RegencyTrait.php',
+        'AzisHapidin\\IndoRegion\\Traits\\VillageTrait' => __DIR__ . '/..' . '/azishapidin/indoregion/src/Traits/VillageTrait.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -650,6 +673,11 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\IndoRegionDistrictSeeder' => __DIR__ . '/../..' . '/database/seeders/IndoRegionDistrictSeeder.php',
+        'Database\\Seeders\\IndoRegionProvinceSeeder' => __DIR__ . '/../..' . '/database/seeders/IndoRegionProvinceSeeder.php',
+        'Database\\Seeders\\IndoRegionRegencySeeder' => __DIR__ . '/../..' . '/database/seeders/IndoRegionRegencySeeder.php',
+        'Database\\Seeders\\IndoRegionSeeder' => __DIR__ . '/../..' . '/database/seeders/IndoRegionSeeder.php',
+        'Database\\Seeders\\IndoRegionVillageSeeder' => __DIR__ . '/../..' . '/database/seeders/IndoRegionVillageSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -4618,6 +4646,12 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
         'PHPUnit\\Util\\Xml' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Xml.php',
         'PHPUnit\\Util\\Xml\\Loader' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Loader.php',
         'PHPUnit\\Util\\Xml\\XmlException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Exception/XmlException.php',
+        'ParseCsv\\Csv' => __DIR__ . '/..' . '/parsecsv/php-parsecsv/src/Csv.php',
+        'ParseCsv\\enums\\AbstractEnum' => __DIR__ . '/..' . '/parsecsv/php-parsecsv/src/enums/AbstractEnum.php',
+        'ParseCsv\\enums\\DatatypeEnum' => __DIR__ . '/..' . '/parsecsv/php-parsecsv/src/enums/DatatypeEnum.php',
+        'ParseCsv\\enums\\FileProcessingModeEnum' => __DIR__ . '/..' . '/parsecsv/php-parsecsv/src/enums/FileProcessingModeEnum.php',
+        'ParseCsv\\enums\\SortEnum' => __DIR__ . '/..' . '/parsecsv/php-parsecsv/src/enums/SortEnum.php',
+        'ParseCsv\\extensions\\DatatypeTrait' => __DIR__ . '/..' . '/parsecsv/php-parsecsv/src/extensions/DatatypeTrait.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',

@@ -54,6 +54,7 @@ return array(
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'PhpOffice\\PhpWord\\' => array($vendorDir . '/phpoffice/phpword/src/PhpWord'),
     'PhpOffice\\Math\\' => array($vendorDir . '/phpoffice/math/src/Math'),
+    'ParseCsv\\' => array($vendorDir . '/parsecsv/php-parsecsv/src'),
     'NunoMaduro\\Collision\\' => array($vendorDir . '/nunomaduro/collision/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Mockery\\' => array($vendorDir . '/mockery/mockery/library/Mockery'),
@@ -89,5 +90,6 @@ return array(
     'Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
+    'AzisHapidin\\IndoRegion\\' => array($vendorDir . '/azishapidin/indoregion/src'),
     'App\\' => array($baseDir . '/app', $vendorDir . '/laravel/pint/app'),
 );
