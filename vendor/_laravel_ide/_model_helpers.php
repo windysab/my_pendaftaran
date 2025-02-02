@@ -5,9 +5,15 @@ namespace App\Models {
     /**
      * App\Models\District
      *
+     * @property string $name
+     * @property char(4) $regency_id
+     * @property int $id
      * @property-read \App\Models\Regency $regency
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Village> $villages
      * @property-read int|null $villages_count
+     * @method static \Illuminate\Database\Eloquent\Builder|District whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|District whereRegencyId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|District whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder|District newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|District newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|District query()
@@ -244,6 +250,128 @@ namespace App\Models {
     /**
      * App\Models\Gugatan
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property string|null $alasan_meninggalkan
+     * @property string $desa_meninggalkan
+     * @property string $siapa_meninggalkan
+     * @property string $jenis_perpisahan
+     * @property date|null $tanggal_perpisahan
+     * @property string $upaya_merukunkan
+     * @property string|null $detail_alasan
+     * @property string|null $alasan_perselisihan
+     * @property date|null $tanggal_perselisihan
+     * @property date|null $tanggal_lahir_anak_10
+     * @property string|null $anak_10
+     * @property date|null $tanggal_lahir_anak_9
+     * @property string|null $anak_9
+     * @property date|null $tanggal_lahir_anak_8
+     * @property string|null $anak_8
+     * @property date|null $tanggal_lahir_anak_7
+     * @property string|null $anak_7
+     * @property date|null $tanggal_lahir_anak_6
+     * @property string|null $anak_6
+     * @property date|null $tanggal_lahir_anak_5
+     * @property string|null $anak_5
+     * @property date|null $tanggal_lahir_anak_4
+     * @property string|null $anak_4
+     * @property date|null $tanggal_lahir_anak_3
+     * @property string|null $anak_3
+     * @property date|null $tanggal_lahir_anak_2
+     * @property string|null $anak_2
+     * @property date|null $tanggal_lahir_anak_1
+     * @property string|null $anak_1
+     * @property string $jumlah_anak
+     * @property string $kumpul_baik_selama_bulan
+     * @property string $kumpul_baik_selama_tahun
+     * @property string|null $detail_lainnya
+     * @property string $desa
+     * @property string $tempat_tinggal
+     * @property string $kabupaten_kua
+     * @property string $kecamatan_kua
+     * @property date $tanggal_akta_nikah
+     * @property string $nomor_akta_nikah
+     * @property string $kabupaten_pernikahan
+     * @property string $kecamatan_pernikahan
+     * @property string $desa_pernikahan
+     * @property date $tanggal_pernikahan
+     * @property string $hari_pernikahan
+     * @property string $alamat_tergugat
+     * @property string $pendidikan_tergugat
+     * @property string $pekerjaan_tergugat
+     * @property string $agama_tergugat
+     * @property string $umur_tergugat
+     * @property string $bin_tergugat
+     * @property string $nama_tergugat
+     * @property string $alamat_penggugat
+     * @property string $pendidikan_penggugat
+     * @property string $pekerjaan_penggugat
+     * @property string $agama_penggugat
+     * @property string $umur_penggugat
+     * @property string $binti_penggugat
+     * @property string $nama_penggugat
+     * @property int $id
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereNamaPenggugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereBintiPenggugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereUmurPenggugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAgamaPenggugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan wherePekerjaanPenggugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan wherePendidikanPenggugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAlamatPenggugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereNamaTergugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereBinTergugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereUmurTergugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAgamaTergugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan wherePekerjaanTergugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan wherePendidikanTergugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAlamatTergugat($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereHariPernikahan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalPernikahan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereDesaPernikahan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereKecamatanPernikahan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereKabupatenPernikahan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereNomorAktaNikah($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalAktaNikah($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereKecamatanKua($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereKabupatenKua($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTempatTinggal($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereDesa($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereDetailLainnya($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereKumpulBaikSelamaTahun($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereKumpulBaikSelamaBulan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereJumlahAnak($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak1($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak1($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak2($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak2($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak3($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak3($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak4($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak4($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak5($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak5($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak6($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak6($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak7($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak7($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak8($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak8($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak9($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak9($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAnak10($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalLahirAnak10($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalPerselisihan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAlasanPerselisihan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereDetailAlasan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereUpayaMerukunkan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereTanggalPerpisahan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereJenisPerpisahan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereSiapaMeninggalkan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereDesaMeninggalkan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereAlasanMeninggalkan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Gugatan whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Gugatan newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Gugatan newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Gugatan query()
@@ -480,10 +608,14 @@ namespace App\Models {
     /**
      * App\Models\Province
      *
+     * @property string $name
+     * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Regency> $regencies
      * @property-read int|null $regencies_count
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\District> $districts
      * @property-read int|null $districts_count
+     * @method static \Illuminate\Database\Eloquent\Builder|Province whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Province whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Province newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Province newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Province query()
@@ -720,11 +852,17 @@ namespace App\Models {
     /**
      * App\Models\Regency
      *
+     * @property string $name
+     * @property char(2) $province_id
+     * @property int $id
      * @property-read \App\Models\Province $province
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\District> $districts
      * @property-read int|null $districts_count
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Village> $villages
      * @property-read int|null $villages_count
+     * @method static \Illuminate\Database\Eloquent\Builder|Regency whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Regency whereProvinceId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Regency whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Regency newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Regency newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Regency query()
@@ -1215,7 +1353,13 @@ namespace App\Models {
     /**
      * App\Models\Village
      *
+     * @property string $name
+     * @property char(7) $district_id
+     * @property int $id
      * @property-read \App\Models\District $district
+     * @method static \Illuminate\Database\Eloquent\Builder|Village whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Village whereDistrictId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Village whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Village newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Village newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Village query()
