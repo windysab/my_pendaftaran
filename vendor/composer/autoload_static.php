@@ -542,6 +542,8 @@ class ComposerStaticInit4f9cbd7d02b883f2eae3f85d2d10dc04
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\Api\\IndoregionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/IndoregionController.php',
+        'App\\Http\\Controllers\\Api\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ProductController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\GugatanController' => __DIR__ . '/../..' . '/app/Http/Controllers/GugatanController.php',
         'App\\Http\\Controllers\\IndoregionController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndoregionController.php',
