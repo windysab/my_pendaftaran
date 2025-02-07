@@ -1,54 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-gradient-to-b from-court-green-50 to-white">
-        <!-- Hero Section -->
-        <section class="py-8">
-            <!-- Reduced padding from py-20 to py-16 -->
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h1 class="text-4xl md:text-6xl font-bold text-court-green-800 mb-6">
-                        Buat Gugatan Baru
-                    </h1>
-                    <p class="text-xl text-gray-600 mb-8">
-                        Isi form berikut untuk membuat gugatan baru.
-                    </p>
-                </div>
+<div class="bg-gradient-to-b from-court-green-50 to-white">
+    <!-- Hero Section -->
+    <section class="py-8">
+        <!-- Reduced padding from py-20 to py-16 -->
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-court-green-800 mb-6">
+                    Buat Gugatan Baru
+                </h1>
+                <p class="text-xl text-gray-600 mb-8">
+                    Isi form berikut untuk membuat gugatan baru.
+                </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Form Section -->
-        <section class="py-0">
-            <!-- Reduced padding from py-4 to py-2 -->
-            <div class="container mx-auto px-6">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="bg-gradient-to-r from-green-500 via-teal-400 to-blue-500 px-6 py-4">
-                        <h2 class="text-xl font-semibold text-white">Formulir Gugatan</h2>
+    <!-- Form Section -->
+    <section class="py-0">
+        <!-- Reduced padding from py-4 to py-2 -->
+        <div class="container mx-auto px-6">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-gradient-to-r from-green-500 via-teal-400 to-blue-500 px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Formulir Gugatan</h2>
+                </div>
+
+                <form method="POST" action="{{ route('gugatan.page2') }}" onsubmit="validateForm(event)" id="gugatanForm" class="p-6">
+                    @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Data Penggugat -->
+                        @include('gugatan.partials.penggugat-section')
+
+                        <!-- Data Tergugat -->
+                        @include('gugatan.partials.tergugat-section')
                     </div>
 
-                    <form method="POST" action="{{ route('gugatan.page2') }}" onsubmit="validateForm(event)"
-                        id="gugatanForm" class="p-6">
-                        @csrf
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Data Penggugat -->
-                            @include('gugatan.partials.penggugat-section')
-
-                            <!-- Data Tergugat -->
-                            @include('gugatan.partials.tergugat-section')
-                        </div>
-
-                        <div class="mt-6 text-center">
-                            <button type="submit"
-                                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-court-green-600 hover:bg-court-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-court-green-500 transition-colors duration-200">
-                                {{ isset($gugatan) ? 'Update' : 'Selanjutnya' }}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="mt-6 text-center">
+                        <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-court-green-600 hover:bg-court-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-court-green-500 transition-colors duration-200">
+                            {{ isset($gugatan) ? 'Update' : 'Selanjutnya' }}
+                        </button>
+                    </div>
+                </form>
             </div>
-        </section>
-        @include('gugatan.partials.address-modals')
-    </div>
+        </div>
+    </section>
+    @include('gugatan.partials.address-modals')
+</div>
 @endsection
 
 <!-- Include jQuery -->
@@ -132,4 +130,35 @@
     function openPenggugatAddressModal() {
         $('#penggugatModal').modal('show');
     }
+
+    function savePenggugatAddress(event) {
+        event.preventDefault();
+        var jalan = $('#jalan_penggugat').val();
+        var no = $('#no_penggugat').val();
+        var rt = $('#rt_penggugat').val();
+        var rw = $('#rw_penggugat').val();
+        var kabupaten = $('#kabupaten_penggugat').val();
+        var kecamatan = $('#kecamatan_penggugat option:selected').text();
+        var desa = $('#desa_penggugat option:selected').text();
+
+        var fullAddress = `${jalan} No. ${no}, RT ${rt}/RW ${rw}, Desa ${desa}, Kecamatan ${kecamatan}, Kabupaten ${kabupaten}`;
+        $('#alamat_penggugat').val(fullAddress);
+        $('#penggugatModal').modal('hide');
+    }
+
+    function saveAddress(event) {
+        event.preventDefault();
+        var jalan = $('#jalan').val();
+        var no = $('#no').val();
+        var rt = $('#rt').val();
+        var rw = $('#rw').val();
+        var kabupaten = $('#kabupaten').val();
+        var kecamatan = $('#kecamatan option:selected').text();
+        var desa = $('#desa option:selected').text();
+
+        var fullAddress = `${jalan} No. ${no}, RT ${rt}/RW ${rw}, Desa ${desa}, Kecamatan ${kecamatan}, Kabupaten ${kabupaten}`;
+        $('#alamat_tergugat').val(fullAddress);
+        $('#tergugatModal').modal('hide');
+    }
+
 </script>
