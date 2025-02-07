@@ -176,6 +176,7 @@
 </div>
 
 @push('scripts')
+
 <script>
     // Toggle Tempat Tinggal Fields
     function toggleTempatTinggal() {
