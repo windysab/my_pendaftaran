@@ -2,7 +2,7 @@
 <div id="tergugatModal" class="modal fade show" tabindex="-1" role="dialog" style="display: none;">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content shadow-lg">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header bg-info text-white">
                 <h5 class="modal-title">Alamat Lengkap Tergugat</h5>
                 <button type="button" class="close text-white" onclick="closeAddressModal()">
                     <span>&times;</span>
@@ -23,7 +23,7 @@
                                 <input type="number" id="no" name="no" class="form-control" placeholder="No Rumah">
                             </div>
                         </div>
-                        <div class="col-md2">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="rt"><b>RT</b></label>
                                 <input type="number" id="rt" name="rt" class="form-control" placeholder="RT">
@@ -35,7 +35,6 @@
                                 <input type="number" id="rw" name="rw" class="form-control" placeholder="RW">
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="kabupaten"><b>Kabupaten</b></label>
@@ -44,7 +43,6 @@
                                 <span id="error_kabupaten" class="text-danger"></span>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="kecamatan"><b>Kecamatan</b></label>
