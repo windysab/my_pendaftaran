@@ -66,7 +66,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Simpan</button>
-                        <button type="button" class="btn btn-secondary" onclick="closeAddressModal()">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeAddressModal()">Batal</button>
                     </div>
                 </form>
             </div>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Simpan</button>
-                        <button type="button" class="btn btn-secondary" onclick="closePenggugatAddressModal()">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closePenggugatAddressModal()">Batal</button>
                     </div>
                 </form>
             </div>
