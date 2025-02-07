@@ -171,11 +171,17 @@
             </div>
             </form>
         </div>
-</div>
-</section>
+
+    </section>
 </div>
 
-@push('scripts')
+
+
+@endsection
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     // Toggle Tempat Tinggal Fields
     function toggleTempatTinggal() {
@@ -259,6 +265,3 @@
     }
 
 </script>
-@endpush
-
-@endsection
