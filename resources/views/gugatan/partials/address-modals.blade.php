@@ -4,7 +4,7 @@
         <div class="modal-content shadow-lg">
             <div class="modal-header bg-info text-white">
                 <h5 class="modal-title">Alamat Lengkap Tergugat</h5>
-                <button type="button" class="close text-white" onclick="closeAddressModal()">
+                <button type="button" class="close text-white" data-dismiss="modal" onclick="closeAddressModal()">
                     <span>&times;</span>
                 </button>
             </div>
@@ -80,7 +80,7 @@
         <div class="modal-content shadow-lg">
             <div class="modal-header bg-info text-white">
                 <h5 class="modal-title">Alamat Lengkap Penggugat</h5>
-                <button type="button" class="close text-white" onclick="closePenggugatAddressModal()">
+                <button type="button" class="close text-white" data-dismiss="modal" onclick="closePenggugatAddressModal()">
                     <span>&times;</span>
                 </button>
             </div>
