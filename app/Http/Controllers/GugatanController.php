@@ -52,12 +52,15 @@ class GugatanController extends Controller
             $sessionData2,
             $request->all()
         );
+
+        // Validasi data
         $validatedData = $this->validateData($data);
 
         try {
+            // Simpan data ke database
             $gugatan = Gugatan::create($validatedData);
             Log::info('Data stored successfully.');
-            return redirect()->route('gugatan.success')->with('gugatan', $gugatan);
+            return redirect()->route('gugatan.sukses')->with('gugatan', $gugatan);
         } catch (\Exception $e) {
             Log::error('Error storing data:', ['error' => $e->getMessage()]);
             return redirect()->back()->withErrors(['msg' => 'Error storing data.']);

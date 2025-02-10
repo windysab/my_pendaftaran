@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GugatanController;
 
 Route::get('/', function () {
     return view('home');
@@ -38,10 +39,7 @@ Route::post('/gugatan/page3', function () {
     return view('gugatan.gugatan-page3');
 })->name('gugatan.page3');
 
-Route::post('/gugatan/store', function () {
-    // Logic to store the data
-    return redirect()->route('gugatan.index');
-})->name('gugatan.store');
+Route::post('/gugatan/store', [GugatanController::class, 'store'])->name('gugatan.store');
 
 Route::get('/gugatan/sukses', function () {
     return view('gugatan.gugatan-sukses');
