@@ -497,7 +497,7 @@ class GugatanController extends Controller
     public function page2(Request $request)
     {
         // Logika untuk halaman page2
-        return view('gugatan.gugatan.page2', ['type_menu' => 'gugatan']);
+        return view('gugatan.gugatan-page2', ['type_menu' => 'gugatan']);
     }
     public function storePage2(Request $request)
     {
