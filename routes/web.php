@@ -7,10 +7,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/gugatan/create', function () {
-    return view('gugatan.create');
-})->name('gugatan.create');
-
 Route::get('/gugatan', function () {
     return view('daftar_gugatan');
 })->name('gugatan.index');
@@ -30,6 +26,10 @@ Route::get('/sidang', function () {
 Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');
+
+Route::get('/gugatan/create', function () {
+    return view('gugatan.create');
+})->name('gugatan.create');
 
 Route::post('/gugatan/page2', function () {
     return view('gugatan.gugatan-page2');
