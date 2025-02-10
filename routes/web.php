@@ -31,10 +31,17 @@ Route::get('/gugatan/create', function () {
     return view('gugatan.create');
 })->name('gugatan.create');
 
+Route::get('/gugatan/page2', function () {
+    return view('gugatan.gugatan-page2');
+})->name('gugatan.page2');
+
 Route::post('/gugatan/page2', function () {
     return view('gugatan.gugatan-page2');
 })->name('gugatan.page2');
 
+Route::get('/gugatan/page3', function () {
+    return view('gugatan.gugatan-page3');
+})->name('gugatan.page3');
 Route::post('/gugatan/page3', function () {
     return view('gugatan.gugatan-page3');
 })->name('gugatan.page3');
