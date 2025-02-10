@@ -147,7 +147,10 @@
     </section>
 </div>
 
-@push('scripts')
+
+
+@endsection
+
 <script>
     function showTextarea() {
         const alasan = document.getElementById('alasan_perselisihan').value;
@@ -156,6 +159,4 @@
 
     document.addEventListener('DOMContentLoaded', showTextarea);
 </script>
-@endpush
 
-@endsection
