@@ -198,10 +198,23 @@
         }
     }
 
+    // Function to update Hari Pernikahan based on Tanggal Pernikahan
+    function updateHariPernikahan() {
+        const tanggalPernikahan = document.getElementById('tanggal_pernikahan').value;
+        if (tanggalPernikahan) {
+            const date = new Date(tanggalPernikahan);
+            const hari = date.toLocaleDateString('id-ID', { weekday: 'long' });
+            document.getElementById('hari_pernikahan').value = hari;
+        } else {
+            document.getElementById('hari_pernikahan').value = '';
+        }
+    }
+
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         toggleTempatTinggal();
         toggleAnakFields();
+        document.getElementById('tanggal_pernikahan').addEventListener('change', updateHariPernikahan);
     });
 
     $(document).ready(function() {
