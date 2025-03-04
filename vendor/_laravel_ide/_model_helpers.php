@@ -300,14 +300,14 @@ namespace App\Models {
      * @property string $pendidikan_tergugat
      * @property string $pekerjaan_tergugat
      * @property string $agama_tergugat
-     * @property string $umur_tergugat
+     * @property int $umur_tergugat
      * @property string $bin_tergugat
      * @property string $nama_tergugat
      * @property string $alamat_penggugat
      * @property string $pendidikan_penggugat
      * @property string $pekerjaan_penggugat
      * @property string $agama_penggugat
-     * @property string $umur_penggugat
+     * @property int $umur_penggugat
      * @property string $binti_penggugat
      * @property string $nama_penggugat
      * @property int $id

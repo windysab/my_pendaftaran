@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GugatanController;
 
+// Ubah dari view('home.blade') menjadi view('home')
 Route::get('/', function () {
     return view('home');
 });
@@ -42,12 +43,12 @@ Route::post('/gugatan/page2', function () {
 Route::get('/gugatan/page3', function () {
     return view('gugatan.gugatan-page3');
 })->name('gugatan.page3');
-Route::post('/gugatan/page3', function () {
-    return view('gugatan.gugatan-page3');
-})->name('gugatan.page3');
+// Ganti route POST yang salah
+Route::post('/gugatan/page2', [GugatanController::class, 'page2'])->name('gugatan.page2');
+Route::post('/gugatan/page3', [GugatanController::class, 'page3'])->name('gugatan.page3');
+Route::post('/gugatan/page3', [GugatanController::class, 'storePage3'])->name('gugatan.storePage3');
+Route::post('/gugatan', [GugatanController::class, 'store'])->name('gugatan.store');
+// Route::post('/gugatan/store', [GugatanController::class, 'store'])->name('gugatan.store');
 
-Route::post('/gugatan/store', [GugatanController::class, 'store'])->name('gugatan.store');
-
-Route::get('/gugatan/sukses', function () {
-    return view('gugatan.gugatan-sukses');
-})->name('gugatan.sukses');
+// Tambahkan route untuk halaman sukses jika belum ada
+Route::get('/gugatan/sukses/{id}', [GugatanController::class, 'sukses'])->name('gugatan.sukses');

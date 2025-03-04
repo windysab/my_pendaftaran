@@ -12,14 +12,14 @@ class CreateGugatansTable extends Migration
             $table->id();
             $table->string('nama_penggugat');
             $table->string('binti_penggugat');
-            $table->string('umur_penggugat');
+            $table->integer('umur_penggugat');
             $table->string('agama_penggugat');
             $table->string('pekerjaan_penggugat');
             $table->string('pendidikan_penggugat');
             $table->string('alamat_penggugat');
             $table->string('nama_tergugat');
             $table->string('bin_tergugat');
-            $table->string('umur_tergugat');
+            $table->integer('umur_tergugat');
             $table->string('agama_tergugat');
             $table->string('pekerjaan_tergugat');
             $table->string('pendidikan_tergugat');
