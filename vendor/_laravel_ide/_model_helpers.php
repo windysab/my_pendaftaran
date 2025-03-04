@@ -6,7 +6,7 @@ namespace App\Models {
      * App\Models\District
      *
      * @property string $name
-     * @property char(4) $regency_id
+     * @property string $regency_id
      * @property int $id
      * @property-read \App\Models\Regency $regency
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Village> $villages
@@ -256,30 +256,30 @@ namespace App\Models {
      * @property string $desa_meninggalkan
      * @property string $siapa_meninggalkan
      * @property string $jenis_perpisahan
-     * @property date|null $tanggal_perpisahan
+     * @property string|null $tanggal_perpisahan
      * @property string $upaya_merukunkan
      * @property string|null $detail_alasan
      * @property string|null $alasan_perselisihan
-     * @property date|null $tanggal_perselisihan
-     * @property date|null $tanggal_lahir_anak_10
+     * @property string|null $tanggal_perselisihan
+     * @property string|null $tanggal_lahir_anak_10
      * @property string|null $anak_10
-     * @property date|null $tanggal_lahir_anak_9
+     * @property string|null $tanggal_lahir_anak_9
      * @property string|null $anak_9
-     * @property date|null $tanggal_lahir_anak_8
+     * @property string|null $tanggal_lahir_anak_8
      * @property string|null $anak_8
-     * @property date|null $tanggal_lahir_anak_7
+     * @property string|null $tanggal_lahir_anak_7
      * @property string|null $anak_7
-     * @property date|null $tanggal_lahir_anak_6
+     * @property string|null $tanggal_lahir_anak_6
      * @property string|null $anak_6
-     * @property date|null $tanggal_lahir_anak_5
+     * @property string|null $tanggal_lahir_anak_5
      * @property string|null $anak_5
-     * @property date|null $tanggal_lahir_anak_4
+     * @property string|null $tanggal_lahir_anak_4
      * @property string|null $anak_4
-     * @property date|null $tanggal_lahir_anak_3
+     * @property string|null $tanggal_lahir_anak_3
      * @property string|null $anak_3
-     * @property date|null $tanggal_lahir_anak_2
+     * @property string|null $tanggal_lahir_anak_2
      * @property string|null $anak_2
-     * @property date|null $tanggal_lahir_anak_1
+     * @property string|null $tanggal_lahir_anak_1
      * @property string|null $anak_1
      * @property string $jumlah_anak
      * @property string $kumpul_baik_selama_bulan
@@ -289,25 +289,25 @@ namespace App\Models {
      * @property string $tempat_tinggal
      * @property string $kabupaten_kua
      * @property string $kecamatan_kua
-     * @property date $tanggal_akta_nikah
+     * @property string $tanggal_akta_nikah
      * @property string $nomor_akta_nikah
      * @property string $kabupaten_pernikahan
      * @property string $kecamatan_pernikahan
      * @property string $desa_pernikahan
-     * @property date $tanggal_pernikahan
+     * @property string $tanggal_pernikahan
      * @property string $hari_pernikahan
      * @property string $alamat_tergugat
      * @property string $pendidikan_tergugat
      * @property string $pekerjaan_tergugat
      * @property string $agama_tergugat
-     * @property string $umur_tergugat
+     * @property int $umur_tergugat
      * @property string $bin_tergugat
      * @property string $nama_tergugat
      * @property string $alamat_penggugat
      * @property string $pendidikan_penggugat
      * @property string $pekerjaan_penggugat
      * @property string $agama_penggugat
-     * @property string $umur_penggugat
+     * @property int $umur_penggugat
      * @property string $binti_penggugat
      * @property string $nama_penggugat
      * @property int $id
@@ -853,7 +853,7 @@ namespace App\Models {
      * App\Models\Regency
      *
      * @property string $name
-     * @property char(2) $province_id
+     * @property string $province_id
      * @property int $id
      * @property-read \App\Models\Province $province
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\District> $districts
@@ -1102,7 +1102,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string|null $remember_token
-     * @property hashed $password
+     * @property string $password
      * @property \Illuminate\Support\Carbon|null $email_verified_at
      * @property string $email
      * @property string $name
@@ -1354,7 +1354,7 @@ namespace App\Models {
      * App\Models\Village
      *
      * @property string $name
-     * @property char(7) $district_id
+     * @property string $district_id
      * @property int $id
      * @property-read \App\Models\District $district
      * @method static \Illuminate\Database\Eloquent\Builder|Village whereId($value)
