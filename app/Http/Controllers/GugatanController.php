@@ -107,7 +107,7 @@ class GugatanController extends Controller
             'alamat_tergugat' => 'required|string|max:255',
             'hari_pernikahan' => 'required|string|max:255',
             'tanggal_pernikahan' => 'required|date',
-            'desa_pernikahan' => 'required|string|max:255',
+            'desa_pernikahan' => 'nullable|string|max:255',
             'kecamatan_pernikahan' => 'required|string|max:255',
             'kabupaten_pernikahan' => 'required|string|max:255',
             'nomor_akta_nikah' => 'required|string|max:255',
@@ -115,7 +115,7 @@ class GugatanController extends Controller
             'kecamatan_kua' => 'required|string|max:255',
             'kabupaten_kua' => 'required|string|max:255',
             'tempat_tinggal' => 'required|string|max:255',
-            'desa' => 'nullable|string|max:255', // Changed to nullable based on your log data
+            'desa' => 'nullable|string|max:255',
             'detail_lainnya' => 'nullable|string|max:255',
             'kumpul_baik_selama_tahun' => 'required|string|max:255',
             'kumpul_baik_selama_bulan' => 'required|string|max:255',
@@ -635,7 +635,7 @@ class GugatanController extends Controller
         $gugatan = Gugatan::findOrFail($id);
         $data = $request->all();
         $gugatan->update($data);
-        return redirect()->route('gugatan.edit.page3', $id);
+        return redirect()->route(' ', $id);
     }
 
     public function editPage3($id)
