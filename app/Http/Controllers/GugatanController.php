@@ -152,7 +152,7 @@ class GugatanController extends Controller
             // Tambahkan validasi untuk field lain yang diperlukan di halaman pertama
         ]);
 
-     
+
 
         // Redirect ke halaman kedua
         return redirect()->route('gugatan.page2');
@@ -694,3 +694,4 @@ class GugatanController extends Controller
         }
     }
 }
+
