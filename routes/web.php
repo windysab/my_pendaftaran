@@ -52,3 +52,15 @@ Route::post('/gugatan', [GugatanController::class, 'store'])->name('gugatan.stor
 
 // Tambahkan route untuk halaman sukses jika belum ada
 Route::get('/gugatan/sukses/{id}', [GugatanController::class, 'sukses'])->name('gugatan.sukses');
+
+// Gugatan routes
+Route::get('/gugatan', [GugatanController::class, 'index'])->name('gugatan.index');
+Route::get('/gugatan/create', [GugatanController::class, 'create'])->name('gugatan.create');
+Route::post('/gugatan', [GugatanController::class, 'store'])->name('gugatan.store');
+
+// Multi-step form routes
+Route::get('/gugatan/page2', [GugatanController::class, 'page2'])->name('gugatan.page2');
+Route::post('/gugatan/page2', [GugatanController::class, 'storePage2'])->name('gugatan.storePage2');
+Route::get('/gugatan/page3', [GugatanController::class, 'page3'])->name('gugatan.page3');
+Route::post('/gugatan/page3', [GugatanController::class, 'storePage3'])->name('gugatan.storePage3');
+Route::get('/gugatan/sukses/{id}', [GugatanController::class, 'sukses'])->name('gugatan.sukses');

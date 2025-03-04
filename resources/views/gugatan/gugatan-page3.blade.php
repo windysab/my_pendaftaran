@@ -24,7 +24,7 @@
                     <h2 class="text-xl font-semibold text-white">Detail Perselisihan dan Pertengkaran</h2>
                 </div>
 
-                <form method="POST" action="{{ route('gugatan.store') }}" class="p-6">
+                <form method="POST" action="{{ route('gugatan.storePage3') }}">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Detail Perselisihan dan Pertengkaran -->

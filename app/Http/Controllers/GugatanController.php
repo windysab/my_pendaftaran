@@ -31,7 +31,10 @@ class GugatanController extends Controller
     }
     public function create()
     {
-        $type_menu = 'gugatan'; // Define the type_menu variable
+        // Hapus data session lama jika ada
+        session()->forget(['gugatan_step1', 'gugatan_step2', 'gugatan_step3']);
+
+        $type_menu = 'gugatan';
         return view('gugatan.create', compact('type_menu'));
     }
     public function edit($id)
