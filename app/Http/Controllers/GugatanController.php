@@ -43,7 +43,7 @@ class GugatanController extends Controller
     public function store(Request $request)
     {
         // Ambil data dari session
-        $sessionData1 = $request->session()->get('gugatan_form', []);
+        $sessionData1 = $request->session()->get('create', []);
         $sessionData2 = $request->session()->get('gugatan_page2', []);
 
         // Gabungkan data dari session dengan data dari request
