@@ -152,9 +152,7 @@ class GugatanController extends Controller
             // Tambahkan validasi untuk field lain yang diperlukan di halaman pertama
         ]);
 
-        // Simpan data ke session
-        $request->session()->put('gugatan_step1', $request->all());
-        Log::debug('Step1 data saved to session', $request->all());
+     
 
         // Redirect ke halaman kedua
         return redirect()->route('gugatan.page2');
