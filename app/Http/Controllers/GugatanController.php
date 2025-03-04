@@ -558,18 +558,23 @@ class GugatanController extends Controller
                         ->withErrors(['error' => 'Data dari halaman pertama tidak lengkap. Silakan isi form dari awal.']);
                 }
 
-                // Validasi semua data
-                $validated = $this->validateData($allData);
+                try {
+                    // Validasi semua data
+                    $validated = $this->validateData($allData);
 
-                // Simpan ke database
-                $gugatan = Gugatan::create($validated);
-                Log::info('Gugatan created successfully with ID: ' . $gugatan->id);
+                    // Simpan ke database
+                    $gugatan = Gugatan::create($validated);
+                    Log::info('Gugatan created successfully with ID: ' . $gugatan->id);
 
-                // Hapus data session
-                $request->session()->forget(['gugatan_step1', 'gugatan_step2']);
+                    // Hapus data session
+                    $request->session()->forget(['gugatan_step1', 'gugatan_step2']);
 
-                // Redirect ke halaman sukses
-                return redirect()->route('gugatan.sukses', $gugatan->id);
+                    // Redirect ke halaman sukses
+                    return redirect()->route('gugatan.sukses', $gugatan->id);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    // Tangkap error validasi dan kembalikan ke form
+                    return back()->withErrors($e->validator)->withInput();
+                }
             } catch (\Exception $e) {
                 Log::error('Save error: ' . $e->getMessage());
                 return back()->withInput()->withErrors(['error' => 'Save failed: ' . $e->getMessage()]);
