@@ -90,7 +90,7 @@ class GugatanController extends Controller
 
     private function validateData(array $data)
     {
-        $validated = validator($data, [
+        $validator = validator($data, [
             'nama_penggugat' => 'required|string|max:255',
             'binti_penggugat' => 'required|string|max:255',
             'umur_penggugat' => 'required|integer|max:255',
@@ -115,7 +115,7 @@ class GugatanController extends Controller
             'kecamatan_kua' => 'required|string|max:255',
             'kabupaten_kua' => 'required|string|max:255',
             'tempat_tinggal' => 'required|string|max:255',
-            'desa' => 'required|string|max:255',
+            'desa' => 'nullable|string|max:255', // Changed to nullable based on your log data
             'detail_lainnya' => 'nullable|string|max:255',
             'kumpul_baik_selama_tahun' => 'required|string|max:255',
             'kumpul_baik_selama_bulan' => 'required|string|max:255',
@@ -149,13 +149,13 @@ class GugatanController extends Controller
             'siapa_meninggalkan' => 'required|string|max:255',
             'desa_meninggalkan' => 'required|string|max:255',
             'alasan_meninggalkan' => 'nullable|string|max:255',
-            // Tambahkan validasi untuk field lain yang diperlukan di halaman pertama
         ]);
 
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
-
-        // Redirect ke halaman kedua
-        return redirect()->route('gugatan.page2');
+        return $validator->validate();
     }
 
     public function sukses($id)
