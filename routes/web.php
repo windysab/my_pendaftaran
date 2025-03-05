@@ -72,5 +72,5 @@ Route::get('/gugatan/page2', [GugatanController::class, 'showPage2'])->name('gug
 // Add this route for page3
 Route::get('/gugatan/page3', [GugatanController::class, 'showPage3'])->name('gugatan.page3');
 
-
+Route::get('/gugatan/generate-word/{id}', [GugatanController::class, 'generateWordDocument'])->name('gugatan.generateWord');
 Route::get('/gugatan/sukses/{id}', [GugatanController::class, 'sukses'])->name('gugatan.sukses');

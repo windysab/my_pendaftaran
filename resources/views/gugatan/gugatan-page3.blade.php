@@ -34,8 +34,7 @@
                             </div>
                             <div class="p-4 space-y-4">
                                 <div class="relative w-full">
-                                    <input type="date" id="tanggal_perselisihan" name="tanggal_perselisihan"
-                                        class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black" required>
+                                    <input type="date" id="tanggal_perselisihan" name="tanggal_perselisihan" class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black" required>
                                     <label class="input-floating-label">Tanggal Perselisihan</label>
                                 </div>
                                 <div class="relative w-full">
@@ -85,8 +84,7 @@
                             </div>
                             <div class="p-4 space-y-4">
                                 <div class="relative w-full">
-                                    <input type="date" id="tanggal_perpisahan" name="tanggal_perpisahan"
-                                        class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black" required>
+                                    <input type="date" id="tanggal_perpisahan" name="tanggal_perpisahan" class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black" required>
                                     <label class="input-floating-label">Tanggal Perpisahan</label>
                                 </div>
                                 <div class="relative w-full">
@@ -111,36 +109,39 @@
                                         <label class="ml-2" for="penggugat">Penggugat</label>
                                     </div>
                                 </div>
-                                <div class="relative w-full">
-                                    <input type="text" id="desa" name="desa"
-                                        class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black" placeholder="Nama desa" required>
-                                    <label class="input-floating-label">Desa</label>
-                                </div>
-                                <div class="relative w-full">
-                                    <label class="block text-gray-700">Alasan meninggalkan rumah</label>
-                                    <div class="flex items-center mt-2">
-                                        <input class="form-check-input" type="radio" name="alasan_meninggalkan" id="diusir" value="diusir" required>
-                                        <label class="ml-2" for="diusir">Karena diusir oleh</label>
+                                <div class="p-4 space-y-4">
+                                    <!-- ... existing fields ... -->
+                                    <div class="relative w-full">
+                                        <input type="text" id="desa_meninggalkan" name="desa_meninggalkan" class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black" placeholder="Nama desa meninggalkan" required>
+                                        <label class="input-floating-label">Desa Meninggalkan</label>
                                     </div>
-                                    <div class="flex items-center mt-2">
-                                        <input class="form-check-input" type="radio" name="alasan_meninggalkan" id="keinginan_sendiri" value="keinginan_sendiri" required>
-                                        <label class="ml-2" for="keinginan_sendiri">Keinginan sendiri</label>
+                                    <div class="relative w-full">
+                                        <input type="text" id="desa" name="desa" class="input is-valid mt-1 block w-full border border-gray-300 focus:border-blue-500 bg-white text-black" placeholder="Nama desa" required>
+                                        <label class="input-floating-label">Desa</label>
+                                    </div>
+                                    <div class="relative w-full">
+                                        <label class="block text-gray-700">Alasan meninggalkan rumah</label>
+                                        <div class="flex items-center mt-2">
+                                            <input class="form-check-input" type="radio" name="alasan_meninggalkan" id="diusir" value="diusir" required>
+                                            <label class="ml-2" for="diusir">Karena diusir oleh</label>
+                                        </div>
+                                        <div class="flex items-center mt-2">
+                                            <input class="form-check-input" type="radio" name="alasan_meninggalkan" id="keinginan_sendiri" value="keinginan_sendiri" required>
+                                            <label class="ml-2" for="keinginan_sendiri">Keinginan sendiri</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mt-6 text-center">
-                        <button type="button" onclick="window.history.back()"
-                            class="mr-4 inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full shadow-sm text-gray-700 bg-white hover:bg-gray-50">
-                            Sebelumnya
-                        </button>
-                        <button type="submit"
-                            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-court-green-600 hover:bg-court-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-court-green-500">
-                            Submit
-                        </button>
-                    </div>
+                        <div class="mt-6 text-center">
+                            <button type="button" onclick="window.history.back()" class="mr-4 inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full shadow-sm text-gray-700 bg-white hover:bg-gray-50">
+                                Sebelumnya
+                            </button>
+                            <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-court-green-600 hover:bg-court-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-court-green-500">
+                                Submit
+                            </button>
+                        </div>
                 </form>
             </div>
         </div>
@@ -158,5 +159,5 @@
     }
 
     document.addEventListener('DOMContentLoaded', showTextarea);
-</script>
 
+</script>
