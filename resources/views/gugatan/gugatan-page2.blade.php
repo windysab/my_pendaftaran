@@ -28,6 +28,10 @@
 
                 <form method="POST" action="{{ route('gugatan.storePage2') }}">
                     @csrf
+                    <!-- Add session data if exists -->
+                    @if(session('gugatan_step1'))
+                        <input type="hidden" name="step1_data" value="{{ json_encode(session('gugatan_step1')) }}">
+                    @endif
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Detail Pernikahan -->
                         <div class="bg-white rounded-lg shadow-md">

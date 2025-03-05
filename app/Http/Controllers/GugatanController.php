@@ -48,43 +48,128 @@ class GugatanController extends Controller
         Log::debug('Form submission received', $request->all());
 
         try {
-            // Cek apakah ini adalah form multi-step
-            if ($request->has('tanggal_perselisihan') && !$request->has('nama_penggugat')) {
-                // Simpan data sementara ke session
-                $request->session()->put('gugatan_step2', $request->all());
+            $validated = $request->validate([
+                'nama_penggugat' => 'required|string|max:255',
+                'binti_penggugat' => 'required|string|max:255',
+                'umur_penggugat' => 'required|integer|max:255',
+                'agama_penggugat' => 'required|string|max:255',
+                'pekerjaan_penggugat' => 'required|string|max:255',
+                'pendidikan_penggugat' => 'required|string|max:255',
+                'alamat_penggugat' => 'required|string|max:255',
+                'nama_tergugat' => 'required|string|max:255',
+                'bin_tergugat' => 'required|string|max:255',
+                'umur_tergugat' => 'required|integer|max:255',
+                'agama_tergugat' => 'required|string|max:255',
+                'pekerjaan_tergugat' => 'required|string|max:255',
+                'pendidikan_tergugat' => 'required|string|max:255',
+                'alamat_tergugat' => 'required|string|max:255',
+            ]);
 
-                // Jika ini adalah step kedua, gabungkan dengan data step pertama
-                if ($request->session()->has('gugatan_step1')) {
-                    $allData = array_merge(
-                        $request->session()->get('gugatan_step1', []),
-                        $request->session()->get('gugatan_step2', [])
-                    );
+            // Simpan data ke session
+            $request->session()->put('gugatan_step1', $validated);
 
-                    // Validasi semua data
-                    $validated = $this->validateData($allData);
+            return redirect()->route('gugatan.page2');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator)->withInput();
+        }
+    }
+    public function storePage2(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'hari_pernikahan' => 'required|string|max:255',
+                'tanggal_pernikahan' => 'required|date',
+                'desa_pernikahan' => 'nullable|string|max:255',
+                'kecamatan_pernikahan' => 'required|string|max:255',
+                'kabupaten_pernikahan' => 'required|string|max:255',
+                'nomor_akta_nikah' => 'required|string|max:255',
+                'tanggal_akta_nikah' => 'required|date',
+                'kecamatan_kua' => 'required|string|max:255',
+                'kabupaten_kua' => 'required|string|max:255',
+                'tempat_tinggal' => 'required|string|max:255',
+                'desa' => 'nullable|string|max:255',
+                'detail_lainnya' => 'nullable|string|max:255',
+                'kumpul_baik_selama_tahun' => 'required|string|max:255',
+                'kumpul_baik_selama_bulan' => 'required|string|max:255',
+                'jumlah_anak' => 'required|string|max:255',
+                'anak_1' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_1' => 'nullable|date',
+                'anak_2' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_2' => 'nullable|date',
+                'anak_3' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_3' => 'nullable|date',
+                'anak_4' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_4' => 'nullable|date',
+                'anak_5' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_5' => 'nullable|date',
+                'anak_6' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_6' => 'nullable|date',
+                'anak_7' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_7' => 'nullable|date',
+                'anak_8' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_8' => 'nullable|date',
+                'anak_9' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_9' => 'nullable|date',
+                'anak_10' => 'nullable|string|max:255',
+                'tanggal_lahir_anak_10' => 'nullable|date',
+            ]);
 
-                    // Simpan ke database
-                    $gugatan = Gugatan::create($validated);
+            $request->session()->put('gugatan_step2', $validated);
+            return redirect()->route('gugatan.page3');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator)->withInput();
+        }
+    }
+    public function showPage3()
+    {
+        // Mengembalikan view untuk halaman ketiga
+        return view('gugatan.gugatan-page3', ['type_menu' => 'gugatan']);
+    }
 
-                    // Hapus data session
-                    $request->session()->forget(['gugatan_step1', 'gugatan_step2']);
+    public function storePage3(Request $request)
+    {
+        Log::debug('Form submission page3 received', $request->all());
 
-                    // Redirect ke halaman sukses
-                    return redirect()->route('gugatan.sukses', $gugatan->id);
+        // Simpan data dari halaman ketiga ke session
+        $request->session()->put('gugatan_step3', $request->all());
+
+        // Gabungkan data dari semua step
+        if ($request->session()->has('gugatan_step1') && $request->session()->has('gugatan_step2')) {
+            $allData = array_merge(
+                $request->session()->get('gugatan_step1', []),
+                $request->session()->get('gugatan_step2', []),
+                $request->session()->get('gugatan_step3', [])
+            );
+
+            Log::debug('Merged data from all steps', $allData);
+
+            try {
+                // Validasi semua data
+                $validated = $this->validateData($allData);
+
+                // Ensure $validated is an array
+                if (!is_array($validated)) {
+                    throw new \Exception('Validation did not return an array');
                 }
 
-                // Jika tidak ada data step pertama, redirect ke step berikutnya
-                return redirect()->route('gugatan.page3');
-            } else {
-                // Ini adalah step pertama, simpan ke session
-                $request->session()->put('gugatan_step1', $request->all());
+                // Simpan ke database
+                $gugatan = Gugatan::create($validated);
+                Log::info('Gugatan created successfully with ID: ' . $gugatan->id);
 
-                // Redirect ke step berikutnya
-                return redirect()->route('gugatan.page2');
+                // Hapus data session
+                $request->session()->forget(['gugatan_step1', 'gugatan_step2', 'gugatan_step3']);
+
+                // Redirect ke halaman sukses
+                return redirect()->route('gugatan.sukses', $gugatan->id);
+            } catch (\Exception $e) {
+                Log::error('Save error: ' . $e->getMessage());
+                return back()->withInput()->withErrors(['error' => 'Save failed: ' . $e->getMessage()]);
             }
-        } catch (\Exception $e) {
-            Log::error('Save error: ' . $e->getMessage());
-            return back()->withInput()->withErrors(['error' => 'Save failed: ' . $e->getMessage()]);
+        } else {
+            // Jika tidak ada data step sebelumnya, redirect ke halaman awal
+            Log::error('Missing previous step data in session');
+            return redirect()->route('gugatan.create')
+                ->withErrors(['error' => 'Data dari halaman sebelumnya tidak ditemukan. Silakan isi form dari awal.']);
         }
     }
 
@@ -147,17 +232,16 @@ class GugatanController extends Controller
             'tanggal_perpisahan' => 'nullable|date',
             'jenis_perpisahan' => 'required|string|max:255',
             'siapa_meninggalkan' => 'required|string|max:255',
-            'desa_meninggalkan' => 'required|string|max:255',
+            'desa_meninggalkan' => 'required|string|max:255', // Ensure this field is validated
             'alasan_meninggalkan' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            throw new \Illuminate\Validation\ValidationException($validator);
         }
 
-        return $validator->validate();
+        return $validator->validated();
     }
-
     public function sukses($id)
     {
         $gugatan = Gugatan::findOrFail($id);
@@ -533,56 +617,24 @@ class GugatanController extends Controller
         // Logika untuk halaman page2
         return view('gugatan.gugatan-page2', ['type_menu' => 'gugatan']);
     }
-    public function storePage2(Request $request)
+
+
+    public function showPage2(Request $request)
     {
-        // Log data yang diterima
-        Log::debug('Form submission page2 received', $request->all());
-
-        // Simpan data dari halaman kedua ke session
-        $request->session()->put('gugatan_step2', $request->all());
-
-        // Jika sudah ada data dari step pertama, gabungkan dan simpan ke database
-        if ($request->session()->has('gugatan_step1')) {
-            $allData = array_merge(
-                $request->session()->get('gugatan_step1', []),
-                $request->session()->get('gugatan_step2', [])
-            );
-
-            Log::debug('Merged data from step1 and step2', $allData);
-
-            try {
-                // Periksa apakah semua field required ada
-                if (!isset($allData['nama_penggugat']) || empty($allData['nama_penggugat'])) {
-                    Log::error('Missing required field: nama_penggugat');
-                    return redirect()->route('gugatan.create')
-                        ->withErrors(['error' => 'Data dari halaman pertama tidak lengkap. Silakan isi form dari awal.']);
-                }
-
-                try {
-                    // Validasi semua data
-                    $validated = $this->validateData($allData);
-
-                    // Simpan ke database
-                    $gugatan = Gugatan::create($validated);
-                    Log::info('Gugatan created successfully with ID: ' . $gugatan->id);
-
-                    // Hapus data session
-                    $request->session()->forget(['gugatan_step1', 'gugatan_step2']);
-
-                    // Redirect ke halaman sukses
-                    return redirect()->route('gugatan.sukses', $gugatan->id);
-                } catch (\Illuminate\Validation\ValidationException $e) {
-                    // Tangkap error validasi dan kembalikan ke form
-                    return back()->withErrors($e->validator)->withInput();
-                }
-            } catch (\Exception $e) {
-                Log::error('Save error: ' . $e->getMessage());
-                return back()->withInput()->withErrors(['error' => 'Save failed: ' . $e->getMessage()]);
-            }
+        if (!$request->session()->has('gugatan_step1')) {
+            return redirect()->route('gugatan.create');
         }
 
-        // Redirect ke halaman page3
-        return redirect()->route('gugatan.page3');
+        return view('gugatan.gugatan-page2');
+    }
+    private function getChildValidationRules()
+    {
+        $rules = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $rules["anak_$i"] = 'nullable|string|max:255';
+            $rules["tanggal_lahir_anak_$i"] = 'nullable|date';
+        }
+        return $rules;
     }
     public function page3(Request $request)
     {
@@ -657,46 +709,4 @@ class GugatanController extends Controller
         $gugatan->update($data);
         return redirect()->route('gugatan.index')->with('success', 'Gugatan berhasil diperbarui.');
     }
-    public function storePage3(Request $request)
-    {
-        Log::debug('Form submission page3 received', $request->all());
-
-        // Simpan data dari halaman ketiga ke session
-        $request->session()->put('gugatan_step3', $request->all());
-
-        // Gabungkan data dari semua step
-        if ($request->session()->has('gugatan_step1') && $request->session()->has('gugatan_step2')) {
-            $allData = array_merge(
-                $request->session()->get('gugatan_step1', []),
-                $request->session()->get('gugatan_step2', []),
-                $request->session()->get('gugatan_step3', [])
-            );
-
-            Log::debug('Merged data from all steps', $allData);
-
-            try {
-                // Validasi semua data
-                $validated = $this->validateData($allData);
-
-                // Simpan ke database
-                $gugatan = Gugatan::create($validated);
-                Log::info('Gugatan created successfully with ID: ' . $gugatan->id);
-
-                // Hapus data session
-                $request->session()->forget(['gugatan_step1', 'gugatan_step2', 'gugatan_step3']);
-
-                // Redirect ke halaman sukses
-                return redirect()->route('gugatan.sukses', $gugatan->id);
-            } catch (\Exception $e) {
-                Log::error('Save error: ' . $e->getMessage());
-                return back()->withInput()->withErrors(['error' => 'Save failed: ' . $e->getMessage()]);
-            }
-        } else {
-            // Jika tidak ada data step sebelumnya, redirect ke halaman awal
-            Log::error('Missing previous step data in session');
-            return redirect()->route('gugatan.create')
-                ->withErrors(['error' => 'Data dari halaman sebelumnya tidak ditemukan. Silakan isi form dari awal.']);
-        }
-    }
 }
-
