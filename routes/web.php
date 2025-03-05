@@ -8,9 +8,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/gugatan', function () {
-    return view('daftar_gugatan');
-})->name('gugatan.index');
+
+// Route::get('/gugatan', [GugatanController::class, 'index'])->name('gugatan.index');;
 
 Route::get('/layanan', function () {
     return view('layanan');
@@ -54,7 +53,11 @@ Route::post('/gugatan/store', [GugatanController::class, 'store'])->name('gugata
 Route::get('/gugatan/sukses/{id}', [GugatanController::class, 'sukses'])->name('gugatan.sukses');
 
 // Gugatan routes
-Route::get('/gugatan', [GugatanController::class, 'index'])->name('gugatan.index');
+// Ubah route '/gugatan' untuk menggunakan view yang benar
+Route::get('/gugatan', function () {
+    return view('daftar_gugatan'); // Mengarah ke view yang sudah ada
+})->name('gugatan.index');
+
 Route::get('/gugatan/create', [GugatanController::class, 'create'])->name('gugatan.create');
 Route::post('/gugatan', [GugatanController::class, 'store'])->name('gugatan.store');
 
