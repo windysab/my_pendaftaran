@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Statistics</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            width: 90%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-container th,
+        .table-container td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .table-container th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: #ffcc00;
+        }
+
+        .orange {
+            background-color: #ff9900;
+            color: white;
+            font-weight: bold;
+        }
+
+        .blue {
+            background-color: #00bfff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #e0e0e0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0056b3;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>STATISTIK ANGGARAN</h1>
+    </div>
+    <table class="table-container">
+        <tr>
+            <th>Unit DIPA</th>
+            <th>Program</th>
+            <th>Awal</th>
+            <th>Revisi</th>
+            <th>Δ</th>
+            <th>%</th>
+        </tr>
+        <tr>
+            <td>01</td>
+            <td>Badan Urusan Administrasi</td>
+            <td>4,198,424,000</td>
+            <td>3,571,588,000</td>
+            <td>-15%</td>
+            <td>98.5%</td>
+        </tr>
+        <tr>
+            <td>04</td>
+            <td>Ditjen Badan Peradilan Agama</td>
+            <td>89,468,000</td>
+            <td>55,015,000</td>
+            <td>-39%</td>
+            <td>1.5%</td>
+        </tr>
+        <tr class="orange">
+            <td colspan="6">DIPA 01 - BADAN URUSAN ADMINISTRASI</td>
+        </tr>
+        <tr>
+            <td>A</td>
+            <td>Belanja Pegawai ASN</td>
+            <td>2,760,471,000</td>
+            <td>2,760,471,000</td>
+            <td>0%</td>
+            <td>77%</td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>Belanja Operasional dan Pemeliharaan</td>
+            <td>1,312,916,000</td>
+            <td>811,077,000</td>
+            <td>-38%</td>
+            <td>23%</td>
+        </tr>
+        <tr>
+            <td>a</td>
+            <td>Kebutuhan Sehari-Hari Perkantoran</td>
+            <td>527,640,000</td>
+            <td>491,804,000</td>
+            <td>-7%</td>
+            <td>14%</td>
+        </tr>
+        <tr>
+            <td>b</td>
+            <td>Langganan Daya dan Jasa</td>
+            <td>192,924,000</td>
+            <td>187,665,000</td>
+            <td>-3%</td>
+            <td>5%</td>
+        </tr>
+        <tr>
+            <td>c</td>
+            <td>Pemeliharaan Kantor</td>
+            <td>431,164,000</td>
+            <td>81,590,000</td>
+            <td>-81%</td>
+            <td>2%</td>
+        </tr>
+        <tr>
+            <td>d</td>
+            <td>Pembayaran Terkait Operasional</td>
+            <td>83,618,000</td>
+            <td>0</td>
+            <td>-100%</td>
+            <td>0%</td>
+        </tr>
+        <tr>
+            <td>e</td>
+            <td>Keuangan dan Fasilitas Hakim</td>
+            <td>42,120,000</td>
+            <td>42,120,000</td>
+            <td>0%</td>
+            <td>1%</td>
+        </tr>
+        <tr>
+            <td>f</td>
+            <td>Perjalanan Dinas</td>
+            <td>35,450,000</td>
+            <td>7,898,000</td>
+            <td>-78%</td>
+            <td>0.2%</td>
+        </tr>
+        <tr>
+            <td>g</td>
+            <td>Lainnya</td>
+            <td>1,000,000</td>
+            <td>0</td>
+            <td>-100%</td>
+            <td>0%</td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>Belanja Modal</td>
+            <td>124,037,000</td>
+            <td>40,000</td>
+            <td>-99.97%</td>
+            <td>0.001%</td>
+        </tr>
+        <tr class="total-row">
+            <td colspan="2">Total</td>
+            <td>4,197,424,000</td>
+            <td>3,571,588,000</td>
+            <td>-15%</td>
+            <td>100%</td>
+        </tr>
+        <tr class="blue">
+            <td colspan="6">DIPA 04 - DITJEN BADAN PERADILAN AGAMA</td>
+        </tr>
+        <tr>
+            <td>A</td>
+            <td>Pos Bantuan Hukum</td>
+            <td>40,000,000</td>
+            <td>40,000,000</td>
+            <td>0%</td>
+            <td>73%</td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>Pembebasan Biaya Perkara</td>
+            <td>15,502,000</td>
+            <td>0</td>
+            <td>-100%</td>
+            <td>0%</td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>Sidang di Luar Gedung Pengadilan</td>
+            <td>27,420,000</td>
+            <td>14,400,000</td>
+            <td>-47%</td>
+            <td>26%</td>
+        </tr>
+        <tr>
+            <td>D</td>
+            <td>Layanan Sidang Terpadu</td>
+            <td>6,546,000</td>
+            <td>615,000</td>
+            <td>-91%</td>
+            <td>1%</td>
+        </tr>
+        <tr class="total-row">
+            <td colspan="2">Total</td>
+            <td>89,468,000</td>
+            <td>55,015,000</td>
+            <td>-39%</td>
+            <td>100%</td>
+        </tr>
+    </table>
+    <div class="footer">
+        <p>© 2023 Budget Statistics</p>
+    </div>
+</body>
+
+</html>
