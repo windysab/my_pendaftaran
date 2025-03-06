@@ -11,10 +11,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-bold text-court-green-800">
+                <h1 class="text-3xl md:text-4xl font-bold text-court-green-800">
                     Gugatan Tersimpan!
                 </h1>
-                <p class="text-base text-gray-600 md:text-lg md:leading-relaxed max-w-xl mx-auto">
+                <p class="text-lg text-gray-600 md:text-xl md:leading-relaxed max-w-xl mx-auto">
                     Data gugatan Anda telah berhasil disimpan dan dapat diakses kapan saja.
                 </p>
             </div>
@@ -30,7 +30,7 @@
                         <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"></path>
                         </svg>
-                        <h2 class="text-xl font-bold text-white">Rincian Gugatan</h2>
+                        <h2 class="text-2xl font-bold text-white">Rincian Gugatan</h2>
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($gugatan->toArray() as $key => $value)
                                 @if(!empty($value))
-                                <tr class="hover:bg-gray-50 transition-colors">
+                                <tr class="hover:bg-gray-50 transition-colors duration-300">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center gap-2">
                                             <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -72,13 +72,13 @@
                     </div>
 
                     <div class="mt-8 flex flex-row justify-center gap-4">
-                        <a href="{{ route('gugatan.generateWord', $gugatan->id) }}" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transition-all">
+                        <a href="{{ route('gugatan.generateWord', $gugatan->id) }}" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transition-all duration-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
                             Download Dokumen
                         </a>
-                        <button id="printButton" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 transition-colors">
+                        <button id="printButton" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 transition-colors duration-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
                             </svg>
