@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik Mediasi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a3d7a;
+            background-image: url('https://img.freepik.com/free-photo/abstract-blue-extruded-voronoi-blocks-background-minimal-light-clean-corporate-wall-3d-geometric-surface-illustration-polygonal-elements-displacement_1217-2510.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .container {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .table-container {
+            background-color: rgba(10, 61, 122, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .table {
+            color: white;
+            margin-bottom: 0;
+        }
+
+        .table th, .table td {
+            border-color: #1a5ba0;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #0a3d7a;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: rgba(26, 91, 160, 0.3);
+        }
+
+        .table tr:hover {
+            background-color: rgba(26, 91, 160, 0.5);
+        }
+
+        .donut-container {
+            background-color: rgba(10, 61, 122, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .donut-wrapper {
+            height: 300px;
+            position: relative;
+        }
+
+        .donut-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats-container {
+            background-color: rgba(10, 61, 122, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-number {
+            font-size: 72px;
+            font-weight: bold;
+            text-align: center;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats-label {
+            text-align: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>STATISTIK MEDIASI</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Mediation Table -->
+                <div class="table-container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Uraian Mediasi</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Sisa Bulan Lalu</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Perkara Mediasi</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Perkara yang Dimediasi</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">4</td>
+                                <td>Mediasi Berhasil</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Seluruhnya</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Sebagian</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Penetapan Pencabutan</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Tidak Berhasil</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Tidak Dapat Dilaksanakan</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Sisa Mediasi Berjalan</td>
+                                <td>2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Mediation Success Rate Donut Chart -->
+                <div class="donut-container">
+                    <div class="donut-wrapper">
+                        <canvas id="mediationSuccessChart"></canvas>
+                        <div class="donut-center-text">
+                            <div>Keberhasilan</div>
+                            <div>Mediasi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">STATISTIK PENYELESAIAN PERKARA</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Case Resolution Table -->
+                <div class="table-container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Penyelesaian</th>
+                                <th>Jumlah</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Dikabulkan</td>
+                                <td>84</td>
+                                <td>88.4</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Dicabut/Damai</td>
+                                <td>7</td>
+                                <td>7.3</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Ditolak</td>
+                                <td>3</td>
+                                <td>3.2</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Tidak Diterima</td>
+                                <td>1</td>
+                                <td>1.1</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Digugurkan</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Dicoret dari Register</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Perdamaian</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr class="bg-primary">
+                                <td colspan="2">Total</td>
+                                <td>95</td>
+                                <td>100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Case Resolution Bar Chart -->
+                <div class="donut-container">
+                    <div class="donut-wrapper">
+                        <canvas id="caseResolutionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- E-Court Statistics Table -->
+                <div class="table-container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>URAIAN PERKARA</th>
+                                <th>TOTAL</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4">1</td>
+                                <td>Penerimaan Perkara</td>
+                                <td>95</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>Secara E-Court</td>
+                                <td>95</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>Secara Non E-Court</td>
+                                <td>0</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Putusan</td>
+                                <td>88</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">2</td>
+                                <td>Secara E-Court</td>
+                                <td>88</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>Secara Non E-Court</td>
+                                <td>0</td>
+                                <td>0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- E-Court Bar Chart -->
+                <div class="donut-container">
+                    <div class="donut-wrapper">
+                        <canvas id="eCourtChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Case Statistics -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stats-container">
+                            <div class="stats-number">057</div>
+                            <div class="stats-label">BHT</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-container">
+                            <div class="stats-number">000</div>
+                            <div class="stats-label">Banding</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-container">
+                            <div class="stats-number">000</div>
+                            <div class="stats-label">Kasasi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mediation Success Rate Donut Chart
+            const mediationSuccessCtx = document.getElementById('mediationSuccessChart').getContext('2d');
+            const mediationSuccessChart = new Chart(mediationSuccessCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Berhasil', 'Tidak Berhasil', 'Tidak Dapat Dilaksanakan', 'Berjalan'],
+                    datasets: [{
+                        data: [31.3, 50, 6.3, 12.5],
+                        backgroundColor: [
+                            '#4CAF50',  // Green - Success
+                            '#F44336',  // Red - Failure
+                            '#FFC107',  // Yellow - Cannot be executed
+                            '#2196F3'   // Blue - In progress
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                },
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    if (data.labels.length && data.datasets.length) {
+                                        return data.labels.map(function(label, i) {
+                                            const meta = chart.getDatasetMeta(0);
+                                            const style = meta.controller.getStyle(i);
+                                            return {
+                                                text: label + ': ' + data.datasets[0].data[i] + '%',
+                                                fillStyle: style.backgroundColor,
+                                                strokeStyle: style.borderColor,
+                                                lineWidth: style.borderWidth,
+                                                hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
+                                                index: i
+                                            };
+                                        });
+                                    }
+                                    return [];
+                                }
+                            }
+                        }
+                    }
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 90,
+                            ticks: {
+                                stepSize: 15,
+                                color: 'white'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: 'white'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Case Resolution Chart
+            const caseResolutionCtx = document.getElementById('caseResolutionChart').getContext('2d');
+            const caseResolutionChart = new Chart(caseResolutionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Dikabulkan', 'Dicabut/Damai', 'Ditolak', 'Tidak Diterima', 'Digugurkan', 'Dicoret', 'Perdamaian'],
+                    datasets: [{
+                        label: 'Jumlah Perkara',
+                        data: [84, 7, 3, 1, 0, 0, 0],
+                        backgroundColor: [
+                            '#4CAF50',  // Green
+                            '#2196F3',  // Blue
+                            '#F44336',  // Red
+                            '#FFC107',  // Yellow
+                            '#9C27B0',  // Purple
+                            '#FF9800',  // Orange
+                            '#00BCD4'   // Cyan
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 90,
+                            ticks: {
+                                stepSize: 15,
+                                color: 'white'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: 'white'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // E-Court Chart
+            const eCourtCtx = document.getElementById('eCourtChart').getContext('2d');
+            const eCourtChart = new Chart(eCourtCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Penerimaan Perkara', 'Putusan'],
+                    datasets: [
+                        {
+                            label: 'E-Court',
+                            data: [95, 88],
+                            backgroundColor: '#4CAF50',
+                            borderColor: '#4CAF50',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Non E-Court',
+                            data: [0, 0],
+                            backgroundColor: '#F44336',
+                            borderColor: '#F44336',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20,
+                                color: 'white'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: 'white'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

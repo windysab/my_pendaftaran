@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafik Anggaran</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #0a3d7a;
+            background-image: linear-gradient(to bottom right, #0a3d7a, #1a5ba0);
+            color: white;
+        }
+
+        .table-container {
+            margin: 10px auto;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .table th:first-child, .table td:first-child {
+            text-align: center;
+        }
+
+        .table th:nth-child(2), .table td:nth-child(2) {
+            text-align: left;
+        }
+
+        .cyan-header {
+            background-color: #00bcd4;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .cyan-light {
+            background-color: #80deea;
+        }
+
+        .green-cell {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .chart-container {
+            background-color: #ffeb3b;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .chart-title {
+            position: absolute;
+            right: 40px;
+            top: 40px;
+            font-size: 36px;
+            color: rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        .chart-wrapper {
+            height: 250px;
+            position: relative;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            height: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .pagination .page-item {
+            margin: 0 2px;
+        }
+
+        .pagination .page-link {
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            padding: 0;
+            background-color: #ccc;
+            border: none;
+        }
+
+        .pagination .active .page-link {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- DIPA 04 Table -->
+        <div class="table-container">
+            <div class="cyan-header">
+                DIPA 04 - DITJEN BADAN PERADILAN AGAMA
+            </div>
+            <table class="table table-bordered mb-0">
+                <thead>
+                    <tr class="cyan-light">
+                        <th colspan="2" style="width: 35%;">KOMPONEN/SUB KOMPONEN</th>
+                        <th colspan="4" style="text-align: center;">PAGU</th>
+                    </tr>
+                    <tr class="cyan-light">
+                        <th style="width: 5%;"></th>
+                        <th style="width: 30%; text-align: left;">Komponen</th>
+                        <th style="width: 15%;">Revisi</th>
+                        <th style="width: 15%;">Realisasi</th>
+                        <th style="width: 10%;">%</th>
+                        <th style="width: 15%;">Sisa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A</td>
+                        <td>POS BANTUAN HUKUM</td>
+                        <td>40.000.000</td>
+                        <td>3.333.333</td>
+                        <td class="green-cell">8%</td>
+                        <td>36.666.667</td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>PEMBEBASAN BIAYA PERKARA</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td class="green-cell">0%</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>SIDANG DI LUAR GEDUNG PENGADILAN</td>
+                        <td>14.400.000</td>
+                        <td>0</td>
+                        <td class="green-cell">0%</td>
+                        <td>14.400.000</td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td>LAYANAN SIDANG TERPADU</td>
+                        <td>615.000</td>
+                        <td>0</td>
+                        <td class="green-cell">0%</td>
+                        <td>615.000</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2">Total</td>
+                        <td>55.015.000</td>
+                        <td>3.333.333</td>
+                        <td>6%</td>
+                        <td>51.681.667</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Chart Carousel -->
+        <div id="chartCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <!-- First Chart - DIPA Comparison -->
+                <div class="carousel-item active">
+                    <div class="chart-container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="chart-wrapper">
+                                    <canvas id="dipaComparisonChart"></canvas>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <div class="d-inline-block mr-4">
+                                        <span style="display: inline-block; width: 15px; height: 15px; background-color: #ff6384;"></span>
+                                        <span>Anggaran (Miliar)</span>
+                                    </div>
+                                    <div class="d-inline-block">
+                                        <span style="display: inline-block; width: 15px; height: 15px; background-color: #4bc0c0;"></span>
+                                        <span>Realisasi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Chart - DIPA 04 Components -->
+                <div class="carousel-item">
+                    <div class="chart-container">
+                        <div class="chart-title">DIPA 04</div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="chart-wrapper">
+                                    <canvas id="dipa04Chart"></canvas>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <div class="d-inline-block mr-4">
+                                        <span style="display: inline-block; width: 15px; height: 15px; background-color: #ff6384;"></span>
+                                        <span>Anggaran (Juta)</span>
+                                    </div>
+                                    <div class="d-inline-block">
+                                        <span style="display: inline-block; width: 15px; height: 15px; background-color: #4bc0c0;"></span>
+                                        <span>Realisasi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Chart - DIPA 01 Components -->
+                <div class="carousel-item">
+                    <div class="chart-container">
+                        <div class="chart-title">DIPA 01</div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="chart-wrapper">
+                                    <canvas id="dipa01Chart"></canvas>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <div class="d-inline-block mr-4">
+                                        <span style="display: inline-block; width: 15px; height: 15px; background-color: #ff6384;"></span>
+                                        <span>Anggaran (Juta)</span>
+                                    </div>
+                                    <div class="d-inline-block">
+                                        <span style="display: inline-block; width: 15px; height: 15px; background-color: #4bc0c0;"></span>
+                                        <span>Realisasi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#chartCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#chartCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+            <!-- Pagination Indicators -->
+            <ul class="pagination">
+                <li class="page-item active"><a class="page-link" href="#chartCarousel" data-slide-to="0"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="1"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="2"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="3"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="4"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="5"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="6"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="7"></a></li>
+                <li class="page-item"><a class="page-link" href="#chartCarousel" data-slide-to="8"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DIPA Comparison Chart (DIPA 01 vs DIPA 04)
+            const dipaComparisonCtx = document.getElementById('dipaComparisonChart').getContext('2d');
+            const dipaComparisonChart = new Chart(dipaComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['DIPA 01', 'DIPA 04'],
+                    datasets: [
+                        {
+                            label: 'Anggaran (Miliar)',
+                            data: [3.5, 0.05],
+                            backgroundColor: '#ff6384',
+                            borderColor: '#ff6384',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Realisasi',
+                            data: [0.5, 0.003],
+                            backgroundColor: '#4bc0c0',
+                            borderColor: '#4bc0c0',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 4,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // DIPA 04 Components Chart
+            const dipa04Ctx = document.getElementById('dipa04Chart').getContext('2d');
+            const dipa04Chart = new Chart(dipa04Ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['A', 'B', 'C', 'D'],
+                    datasets: [
+                        {
+                            label: 'Anggaran (Juta)',
+                            data: [40, 0, 14.4, 0.6],
+                            backgroundColor: '#ff6384',
+                            borderColor: '#ff6384',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Realisasi',
+                            data: [3.3, 0, 0, 0],
+                            backgroundColor: '#4bc0c0',
+                            borderColor: '#4bc0c0',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 40,
+                            ticks: {
+                                stepSize: 10
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // DIPA 01 Components Chart
+            const dipa01Ctx = document.getElementById('dipa01Chart').getContext('2d');
+            const dipa01Chart = new Chart(dipa01Ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['A', 'B', '(a)', '(b)', '(c)', '(d)', '(e)', '(f)', '(g)', 'C'],
+                    datasets: [
+                        {
+                            label: 'Anggaran (Juta)',
+                            data: [2760, 811, 491, 187, 81, 0, 42, 7, 0, 0.04],
+                            backgroundColor: '#ff6384',
+                            borderColor: '#ff6384',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Realisasi',
+                            data: [437, 88, 39, 28, 7, 0, 10, 2, 0, 0.039],
+                            backgroundColor: '#4bc0c0',
+                            borderColor: '#4bc0c0',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 3000,
+                            ticks: {
+                                stepSize: 500
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

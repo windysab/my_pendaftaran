@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik Perkara</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #0a3d7a;
+            color: white;
+            padding: 20px;
+            position: relative;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        .gavel-icon {
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            width: 80px;
+        }
+
+        .section-header {
+            background-color: #00c853;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-wrapper {
+            height: 300px;
+            position: relative;
+        }
+
+        .donut-container {
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .donut-wrapper {
+            height: 150px;
+            position: relative;
+        }
+
+        .donut-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pie-container {
+            background-color: #0a3d7a;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .pie-wrapper {
+            height: 250px;
+            position: relative;
+        }
+
+        .pie-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .table-container {
+            background-color: #0a3d7a;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .table {
+            color: white;
+            margin-bottom: 0;
+        }
+
+        .table th, .table td {
+            border-color: #1a5ba0;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>STATISTIK PERKARA</h1>
+            <img src="https://cdn-icons-png.flaticon.com/512/2961/2961454.png" alt="Gavel Icon" class="gavel-icon">
+        </div>
+
+        <div class="section-header">
+            PENERIMAAN DAN PENYELESAIAN PERKARA FEBRUARI 2025
+        </div>
+
+        <!-- Bar Chart for Case Statistics -->
+        <div class="chart-container">
+            <div class="chart-wrapper">
+                <canvas id="caseStatisticsChart"></canvas>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #4CAF50;"></div>
+                    <span>2025</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #F44336;"></div>
+                    <span>2024</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Donut Charts for Resolution Ratio -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="donut-container">
+                    <div class="donut-title">Rasio Penyelesaian</div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="donut-wrapper">
+                                <canvas id="gugatan-chart"></canvas>
+                            </div>
+                            <div class="text-center mt-2">Gugatan</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="donut-wrapper">
+                                <canvas id="permohonan-chart"></canvas>
+                            </div>
+                            <div class="text-center mt-2">Permohonan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="donut-container">
+                    <div class="donut-title">Rasio Penyelesaian</div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="donut-wrapper">
+                                <canvas id="gugatan-chart2"></canvas>
+                            </div>
+                            <div class="text-center mt-2">Gugatan</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="donut-wrapper">
+                                <canvas id="permohonan-chart2"></canvas>
+                            </div>
+                            <div class="text-center mt-2">Permohonan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bar Chart for Case Types -->
+        <div class="chart-container">
+            <div class="chart-wrapper">
+                <canvas id="caseTypesChart"></canvas>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #F44336;"></div>
+                    <span>Gugatan</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #4CAF50;"></div>
+                    <span>Permohonan</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Chart for Case Categories -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pie-container">
+                    <div class="pie-wrapper">
+                        <canvas id="caseCategoryChart"></canvas>
+                        <div class="pie-center-text">
+                            <div>Kategori</div>
+                            <div>Perkara</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Resolution Time Table -->
+                <div class="table-container">
+                    <h5 class="text-center mb-3">Waktu Penyelesaian</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Waktu Penyelesaian</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>< 3 Bulan</td>
+                                <td>95</td>
+                            </tr>
+                            <tr>
+                                <td>3-5 Bulan</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>> 5 Bulan</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>> 5 Bulan Belum Selesai</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resolution Time Chart -->
+        <div class="chart-container">
+            <div class="chart-wrapper" style="height: 200px;">
+                <canvas id="resolutionTimeChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Case Statistics Chart
+            const caseStatisticsCtx = document.getElementById('caseStatisticsChart').getContext('2d');
+            const caseStatisticsChart = new Chart(caseStatisticsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sisa Lama', 'Diterima', 'Diselesaikan', 'Sisa Baru'],
+                    datasets: [
+                        {
+                            label: '2025',
+                            data: [65, 95, 95, 65],
+                            backgroundColor: '#4CAF50',
+                            borderColor: '#4CAF50',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '2024',
+                            data: [42, 81, 59, 64],
+                            backgroundColor: '#F44336',
+                            borderColor: '#F44336',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Gugatan Donut Chart
+            const gugatanCtx = document.getElementById('gugatan-chart').getContext('2d');
+            const gugatanChart = new Chart(gugatanCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Selesai', 'Belum Selesai'],
+                    datasets: [{
+                        data: [74.1, 25.9],
+                        backgroundColor: ['#FF5722', '#FFEB3B'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Permohonan Donut Chart
+            const permohonanCtx = document.getElementById('permohonan-chart').getContext('2d');
+            const permohonanChart = new Chart(permohonanCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Selesai', 'Belum Selesai'],
+                    datasets: [{
+                        data: [69.6, 30.4],
+                        backgroundColor: ['#FF5722', '#FFEB3B'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gugatan Donut Chart 2
+            const gugatanCtx2 = document.getElementById('gugatan-chart2').getContext('2d');
+            const gugatanChart2 = new Chart(gugatanCtx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Selesai', 'Belum Selesai'],
+                    datasets: [{
+                        data: [105.3, 0],
+                        backgroundColor: ['#4CAF50', '#FFEB3B'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Permohonan Donut Chart 2
+            const permohonanCtx2 = document.getElementById('permohonan-chart2').getContext('2d');
+            const permohonanChart2 = new Chart(permohonanCtx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Selesai', 'Belum Selesai'],
+                    datasets: [{
+                        data: [92.1, 7.9],
+                        backgroundColor: ['#4CAF50', '#FFEB3B'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Case Types Chart
+            const caseTypesCtx = document.getElementById('caseTypesChart').getContext('2d');
+            const caseTypesChart = new Chart(caseTypesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cerai Gugat', 'Cerai Talak', 'Dispensasi Kawin', 'Itsbat Nikah', 'Penetapan Ahli Waris', 'Lainnya'],
+                    datasets: [
+                        {
+                            label: 'Gugatan',
+                            data: [45, 25, 0, 0, 0, 5],
+                            backgroundColor: '#F44336',
+                            borderColor: '#F44336',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Permohonan',
+                            data: [0, 0, 10, 5, 3, 2],
+                            backgroundColor: '#4CAF50',
+                            borderColor: '#4CAF50',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: {
+                                stepSize: 10
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Case Category Pie Chart
+            const caseCategoryCtx = document.getElementById('caseCategoryChart').getContext('2d');
+            const caseCategoryChart = new Chart(caseCategoryCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Cerai Gugat', 'Cerai Talak', 'Dispensasi Kawin', 'Itsbat Nikah', 'Penetapan Ahli Waris', 'Lainnya'],
+                    datasets: [{
+                        data: [45, 25, 10, 5, 3, 7],
+                        backgroundColor: [
+                            '#FF5722',
+                            '#FFC107',
+                            '#4CAF50',
+                            '#2196F3',
+                            '#9C27B0',
+                            '#607D8B'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Resolution Time Chart
+            const resolutionTimeCtx = document.getElementById('resolutionTimeChart').getContext('2d');
+            const resolutionTimeChart = new Chart(resolutionTimeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['< 3 Bulan', '3-5 Bulan', '> 5 Bulan', '> 5 Bulan Belum Selesai'],
+                    datasets: [{
+                        label: 'Jumlah Perkara',
+                        data: [95, 0, 0, 0],
+                        backgroundColor: '#2196F3',
+                        borderColor: '#2196F3',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
