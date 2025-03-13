@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realisasi Anggaran DIPA 04</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #ffde59;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .period {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .dipa-title {
+            font-size: 80px;
+            font-weight: bold;
+            color: #00b050;
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 0 15px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .bar-chart-container {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .bar-chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 300px;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+
+        .bar {
+            width: 40px;
+            background-color: #ff6b6b;
+            margin: 0 5px;
+            position: relative;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .bar-label {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .bar-blue {
+            background-color: #4dabf7;
+        }
+
+        .bar-red {
+            background-color: #ff6b6b;
+        }
+
+        .table-container {
+            margin: 30px 0;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+
+        .table-header {
+            background-color: #4dabf7;
+            color: white;
+        }
+
+        .percentage-cell {
+            font-weight: bold;
+            color: #00b050;
+        }
+
+        .case-count-container {
+            margin: 30px 0;
+        }
+
+        .case-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .case-table {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-header {
+            background-color: #4dabf7;
+            color: white;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .nav-button {
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pie-chart-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">Realisasi Anggaran</div>
+            <div class="period">Periode November</div>
+        </div>
+
+        <div class="dipa-title">DIPA 04</div>
+
+        <div class="pie-chart-container">
+            <canvas id="dipaChart" class="pie-chart"></canvas>
+        </div>
+
+        <div class="chart-legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #3366cc;"></div>
+                <span>Pos Bantuan Hukum</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #00b050;"></div>
+                <span>Prodeo</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #ff9900;"></div>
+                <span>Sidang Keliling</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #9900ff;"></div>
+                <span>Sidang Terpadu</span>
+            </div>
+        </div>
+
+        <div class="bar-chart-container">
+            <div class="case-title">Dalam Juta Rupiah</div>
+            <div class="bar-chart">
+                <div class="bar-group">
+                    <div class="bar bar-red" style="height: 150px;">
+                        <div class="bar-value">40</div>
+                    </div>
+                    <div class="bar bar-blue" style="height: 120px;">
+                        <div class="bar-value">33</div>
+                    </div>
+                    <div class="bar-label">
+                        <i class="fas fa-circle" style="color: #3366cc;"></i>
+                    </div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar bar-red" style="height: 130px;">
+                        <div class="bar-value">35</div>
+                    </div>
+                    <div class="bar bar-blue" style="height: 130px;">
+                        <div class="bar-value">35</div>
+                    </div>
+                    <div class="bar-label">
+                        <i class="fas fa-circle" style="color: #00b050;"></i>
+                    </div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar bar-red" style="height: 220px;">
+                        <div class="bar-value">58</div>
+                    </div>
+                    <div class="bar bar-blue" style="height: 220px;">
+                        <div class="bar-value">58</div>
+                    </div>
+                    <div class="bar-label">
+                        <i class="fas fa-circle" style="color: #ff9900;"></i>
+                    </div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar bar-red" style="height: 30px;">
+                        <div class="bar-value">8</div>
+                    </div>
+                    <div class="bar bar-blue" style="height: 30px;">
+                        <div class="bar-value">8</div>
+                    </div>
+                    <div class="bar-label">
+                        <i class="fas fa-circle" style="color: #9900ff;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                    <span>Pagu</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #4dabf7;"></div>
+                    <span>Realisasi</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="table-header">
+                        <th></th>
+                        <th>Pagu</th>
+                        <th>Realisasi</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-circle" style="color: #3366cc;"></i> Pos Bantuan Hukum</td>
+                        <td>Rp.40.000.000</td>
+                        <td>Rp.33.333.330</td>
+                        <td class="percentage-cell">95.32</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-circle" style="color: #00b050;"></i> Pembebasan Biaya (Prodeo)</td>
+                        <td>Rp.35.750.000</td>
+                        <td>Rp.35.750.000</td>
+                        <td class="percentage-cell">100</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-circle" style="color: #ff9900;"></i> Sidang Luar Gedung (keliling)</td>
+                        <td>Rp.58.200.000</td>
+                        <td>Rp.58.200.000</td>
+                        <td class="percentage-cell">100</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-circle" style="color: #9900ff;"></i> Sidang Terpadu</td>
+                        <td>Rp.8.500.000</td>
+                        <td>Rp.8.500.000</td>
+                        <td class="percentage-cell">100</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="case-count-container">
+            <div class="case-title">Dalam Perkara</div>
+            <div class="bar-chart">
+                <div class="bar-group">
+                    <div class="bar bar-red" style="height: 200px;">
+                        <div class="bar-value">400</div>
+                    </div>
+                    <div class="bar bar-blue" style="height: 250px;">
+                        <div class="bar-value">681</div>
+                    </div>
+                    <div class="bar-label">
+                        <i class="fas fa-circle" style="color: #3366cc;"></i>
+                    </div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar bar-red" style="height: 50px;">
+                        <div class="bar-value">65</div>
+                    </div>
+                    <div class="bar bar-blue" style="height: 80px;">
+                        <div class="bar-value">106</div>
+                    </div>
+                    <div class="bar-label">
+                        <i class="fas fa-circle" style="color: #00b050;"></i>
+                    </div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar bar-red" style="height: 45px;">
+                        <div class="bar-value">60</div>
+                    </div>
+                    <div class="bar bar-blue" style="height: 75px;">
+                        <div class="bar-value">102</div>
+                    </div>
+                    <div class="bar-label">
+                        <i class="fas fa-circle" style="color: #ff9900;"></i>
+                    </div>
+                </div>
+                <div class="bar-group">
+                    <td>10</td>
+                                        <td>23</td>
+                                        <td class="percentage-cell">230</td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    </div>
+
+                                    <div class="navigation">
+                                        <button class="nav-button" onclick="window.location.href='realisasi_anggaran.html'">
+                                            <i class="fas fa-arrow-left"></i>
+                                        </button>
+                                        <button class="nav-button" onclick="window.location.href='dipa01_realisasi.html'">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                    </div>
+
+                                    <script>
+                                        // Pie Chart for DIPA 04
+                                        const ctx = document.getElementById('dipaChart').getContext('2d');
+                                        const dipaChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: {
+                                                labels: ['Pos Bantuan Hukum', 'Prodeo', 'Sidang Keliling', 'Sidang Terpadu'],
+                                                datasets: [{
+                                                    data: [40, 35.75, 58.2, 8.5],
+                                                    backgroundColor: [
+                                                        '#3366cc',
+                                                        '#00b050',
+                                                        '#ff9900',
+                                                        '#9900ff'
+                                                    ],
+                                                    borderColor: [
+                                                        '#ffffff',
+                                                        '#ffffff',
+                                                        '#ffffff',
+                                                        '#ffffff'
+                                                    ],
+                                                    borderWidth: 2
+                                                }]
+                                            },
+                                            options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+                                                plugins: {
+                                                    legend: {
+                                                        display: false
+                                                    },
+                                                    tooltip: {
+                                                        callbacks: {
+                                                            label: function(context) {
+                                                                const label = context.label || '';
+                                                                const value = context.raw || 0;
+                                                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                                                const percentage = Math.round((value / total) * 100);
+                                                                return `${label}: Rp.${value.toLocaleString()} (${percentage}%)`;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+
+                                        // Update the period dynamically
+                                        function updatePeriod() {
+                                            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                                            const now = new Date();
+                                            const currentMonth = months[now.getMonth()];
+                                            document.querySelector('.period').textContent = `Periode ${currentMonth}`;
+                                        }
+
+                                        // Call the function to update the period
+                                        updatePeriod();
+                                    </script>
+                                </body>
+
+                                </html>
