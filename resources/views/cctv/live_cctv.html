@@ -241,6 +241,34 @@
             border-radius: 4px;
             font-size: 12px;
         }
+
+        .status-indicator {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                padding: 3px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .status-indicator.busy {
+                background-color: rgba(220, 53, 69, 0.8);
+                color: white;
+            }
+
+            .status-indicator.quiet {
+                background-color: rgba(40, 167, 69, 0.8);
+                color: white;
+            }
+
+            .status-indicator.moderate {
+                background-color: rgba(255, 193, 7, 0.8);
+                color: white;
+            }
     </style>
 </head>
 <body>
@@ -287,6 +315,9 @@
                         <div class="timestamp">
                             <i class="far fa-clock"></i> <span id="timestamp2"></span>
                         </div>
+                        <div class="status-indicator busy">
+                            <i class="fas fa-users"></i> Sedang Ramai
+                        </div>
                     </div>
                 </div>
             </div>
@@ -306,6 +337,9 @@
                         </button>
                         <div class="timestamp">
                             <i class="far fa-clock"></i> <span id="timestamp3"></span>
+                        </div>
+                        <div class="status-indicator quiet">
+                            <i class="fas fa-user-clock"></i> Sedang Sepi
                         </div>
                     </div>
                 </div>
@@ -356,6 +390,59 @@
         // Update every second
         setInterval(updateTimestamps, 1000);
 
+        // Function to update crowd status
+        function updateCrowdStatus() {
+            // Get all CCTV containers
+            const cctvContainers = document.querySelectorAll('.cctv-container');
+
+            cctvContainers.forEach((container, index) => {
+                // Skip the first container (Halaman Parkir) if it doesn't need crowd status
+                if (index === 0) return;
+
+                // Check if status indicator already exists
+                let statusIndicator = container.querySelector('.status-indicator');
+                if (!statusIndicator) {
+                    // Create status indicator if it doesn't exist
+                    statusIndicator = document.createElement('div');
+                    statusIndicator.className = 'status-indicator';
+                    container.appendChild(statusIndicator);
+                }
+
+                // Simulate crowd detection (in a real system, this would use image analysis)
+                const crowdLevel = Math.floor(Math.random() * 3); // 0: quiet, 1: moderate, 2: busy
+
+                // Remove all existing status classes
+                statusIndicator.classList.remove('quiet', 'moderate', 'busy');
+
+                // Update status based on crowd level
+                let statusText = '';
+                let iconClass = '';
+
+                if (crowdLevel === 0) {
+                    statusIndicator.classList.add('quiet');
+                    statusText = 'Sedang Sepi';
+                    iconClass = 'fas fa-user-clock';
+                } else if (crowdLevel === 1) {
+                    statusIndicator.classList.add('moderate');
+                    statusText = 'Cukup Ramai';
+                    iconClass = 'fas fa-users';
+                } else {
+                    statusIndicator.classList.add('busy');
+                    statusText = 'Sangat Ramai';
+                    iconClass = 'fas fa-users';
+                }
+
+                // Update the content
+                statusIndicator.innerHTML = `<i class="${iconClass}"></i> ${statusText}`;
+            });
+        }
+
+        // Initial crowd status update
+        updateCrowdStatus();
+
+        // Update crowd status every 30 seconds
+        setInterval(updateCrowdStatus, 30000);
+
         // Refresh button functionality
         document.querySelectorAll('.refresh-btn').forEach(button => {
             button.addEventListener('click', function() {
@@ -371,6 +458,9 @@
                 setTimeout(() => {
                     this.classList.remove('fa-spin');
                 }, 1000);
+
+                // Also update crowd status when refreshing
+                updateCrowdStatus();
             });
         });
 
