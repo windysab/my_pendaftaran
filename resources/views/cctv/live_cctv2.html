@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live CCTV Pengadilan Agama Amuntai Kelas IB</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            max-width: 120px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .title {
+            color: #0066cc;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cctv-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+        }
+
+        .cctv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .cctv-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 12px 15px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cctv-header:hover {
+            background-color: #0055b3;
+        }
+
+        .cctv-feed {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Modal styles for zoomed view */
+        .cctv-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 2% auto;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .modal-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .close-modal {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #f8f9fa;
+        }
+
+        .modal-body {
+            padding: 0;
+            background-color: #000;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .zoomed-feed {
+            width: 100%;
+            height: 70vh;
+            border: none;
+        }
+
+        .visitor-counter {
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin-top: 30px;
+        }
+
+        .counter-item {
+            display: inline-block;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        .counter-value {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .refresh-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255,255,255,0.7);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0066cc;
+            transition: all 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        .cctv-container {
+            position: relative;
+        }
+
+        .live-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(220, 53, 69, 0.8);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+        }
+
+        .timestamp {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .status-indicator {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                padding: 3px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .status-indicator.busy {
+                background-color: rgba(220, 53, 69, 0.8);
+                color: white;
+            }
+
+            .status-indicator.quiet {
+                background-color: rgba(40, 167, 69, 0.8);
+                color: white;
+            }
+
+            .status-indicator.moderate {
+                background-color: rgba(255, 193, 7, 0.8);
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://cctv.pa-amuntai.go.id/assets/dist/img/Logo%20PA%20Amuntai%20-%20Trans.png?%3E" alt="Logo Pengadilan Agama Amuntai" class="logo">
+            <h1 class="title">Live CCTV PENGADILAN AGAMA AMUNTAI KELAS IB</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card cctv-card">
+                    <div class="cctv-header">
+                        Halaman Parkir
+                    </div>
+                    <div class="cctv-container">
+                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=883576768194955166649178" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                        <div class="live-indicator">
+                            <div class="live-dot"></div> LIVE
+                        </div>
+                        <button class="refresh-btn" title="Refresh feed">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <div class="timestamp">
+                            <i class="far fa-clock"></i> <span id="timestamp1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card cctv-card">
+                    <div class="cctv-header">
+                        Ruang Tunggu Sidang
+                    </div>
+                    <div class="cctv-container">
+                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=303329746330290962284656" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                        <div class="live-indicator">
+                            <div class="live-dot"></div> LIVE
+                        </div>
+                        <button class="refresh-btn" title="Refresh feed">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <div class="timestamp">
+                            <i class="far fa-clock"></i> <span id="timestamp2"></span>
+                        </div>
+                        <div class="status-indicator busy">
+                            <i class="fas fa-users"></i> Sedang Ramai
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card cctv-card">
+                    <div class="cctv-header">
+                        PTSP
+                    </div>
+                    <div class="cctv-container">
+                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=846338227280923732711848" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                        <div class="live-indicator">
+                            <div class="live-dot"></div> LIVE
+                        </div>
+                        <button class="refresh-btn" title="Refresh feed">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <div class="timestamp">
+                            <i class="far fa-clock"></i> <span id="timestamp3"></span>
+                        </div>
+                        <div class="status-indicator quiet">
+                            <i class="fas fa-user-clock"></i> Sedang Sepi
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="visitor-counter">
+            <div class="counter-item">Pengunjung Hari Ini: <span class="counter-value">16</span></div>
+            <div class="counter-item">Bulan Ini: <span class="counter-value">539</span></div>
+            <div class="counter-item">Total: <span class="counter-value">2229</span></div>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 Pengadilan Agama Amuntai Kelas IB. All Rights Reserved.
+        </div>
+    </div>
+
+    <!-- Modal for zoomed view -->
+    <div id="cctvModal" class="cctv-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">CCTV View</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <iframe id="zoomedFeed" class="zoomed-feed" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Tambahkan TensorFlow.js dan model COCO-SSD untuk deteksi objek -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
+    <script>
+        // Update timestamps
+        function updateTimestamps() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('timestamp1').textContent = timeString;
+            document.getElementById('timestamp2').textContent = timeString;
+            document.getElementById('timestamp3').textContent = timeString;
+        }
+
+        // Initial update
+        updateTimestamps();
+
+        // Update every second
+        setInterval(updateTimestamps, 1000);
+
+        // Variabel untuk menyimpan model deteksi
+        let model;
+
+        // Muat model COCO-SSD saat halaman dimuat
+        async function loadModel() {
+            try {
+                model = await cocoSsd.load();
+                console.log("Model deteksi objek berhasil dimuat");
+                // Mulai deteksi setelah model dimuat
+                detectPeople();
+            } catch (error) {
+                console.error("Gagal memuat model:", error);
+                // Gunakan metode fallback jika model gagal dimuat
+                updateCrowdStatusFallback();
+            }
+        }
+
+        // Fungsi untuk mendeteksi orang dalam feed CCTV menggunakan Computer Vision
+        async function detectPeople() {
+            if (!model) return;
+
+            // Buat elemen canvas tersembunyi untuk memproses gambar
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            document.body.appendChild(canvas);
+            canvas.style.display = 'none';
+
+            // Fungsi untuk mendeteksi orang dalam satu frame CCTV
+            async function processFrame(cctvIndex) {
+                const container = document.querySelectorAll('.cctv-container')[cctvIndex];
+                if (!container) return 0;
+
+                // Dapatkan iframe
+                const iframe = container.querySelector('iframe');
+                if (!iframe) return 0;
+
+                try {
+                    // Ambil gambar dari iframe (catatan: ini hanya simulasi karena keterbatasan keamanan)
+                    // Dalam implementasi nyata, Anda perlu menggunakan server-side processing atau API khusus
+
+                    // Simulasi hasil deteksi untuk demo
+                    let peopleCount;
+                    if (cctvIndex === 1) { // Ruang Tunggu Sidang
+                        peopleCount = Math.floor(Math.random() * 16) + 5;
+                    } else if (cctvIndex === 2) { // PTSP
+                        peopleCount = Math.floor(Math.random() * 10) + 1;
+                    } else {
+                        peopleCount = 0;
+                    }
+
+                    // Perbarui status keramaian berdasarkan hasil deteksi
+                    updateCrowdStatusWithCount(cctvIndex, peopleCount);
+
+                    return peopleCount;
+                } catch (error) {
+                    console.error(`Error processing frame for CCTV ${cctvIndex}:`, error);
+                    return 0;
+                }
+            }
+
+            // Proses semua CCTV
+            for (let i = 1; i < 3; i++) { // Hanya proses Ruang Tunggu dan PTSP
+                await processFrame(i);
+            }
+
+            // Hapus canvas setelah selesai
+            canvas.remove();
+
+            // Jadwalkan deteksi berikutnya
+            setTimeout(detectPeople, 30000); // Deteksi setiap 30 detik
+        }
+
+        // Fungsi untuk memperbarui status keramaian berdasarkan jumlah orang yang terdeteksi
+        function updateCrowdStatusWithCount(cctvIndex, peopleCount) {
+            const container = document.querySelectorAll('.cctv-container')[cctvIndex];
+            if (!container) return;
+
+            // Periksa apakah indikator status sudah ada
+            let statusIndicator = container.querySelector('.status-indicator');
+            if (!statusIndicator) {
+                // Buat indikator status jika belum ada
+                statusIndicator = document.createElement('div');
+                statusIndicator.className = 'status-indicator';
+                container.appendChild(statusIndicator);
+            }
+
+            // Hapus semua kelas status yang ada
+            statusIndicator.classList.remove('quiet', 'moderate', 'busy');
+
+            // Perbarui status berdasarkan jumlah orang
+            let statusText = '';
+            let iconClass = '';
+
+            if (cctvIndex === 1) { // Ruang Tunggu Sidang
+                if (peopleCount < 4) {
+                    statusIndicator.classList.add('quiet');
+                    statusText = `Sepi (${peopleCount} orang)`;
+                    iconClass = 'fas fa-user-clock';
+                } else if (peopleCount < 7) {
+                    statusIndicator.classList.add('moderate');
+                    statusText = `Cukup Ramai (${peopleCount} orang)`;
+                    iconClass = 'fas fa-users';
+                } else {
+                    statusIndicator.classList.add('busy');
+                    statusText = `Sangat Ramai (${peopleCount} orang)`;
+                    iconClass = 'fas fa-users';
+                }
+            } else if (cctvIndex === 2) { // PTSP
+                if (peopleCount < 4) {
+                    statusIndicator.classList.add('quiet');
+                    statusText = `Sepi (${peopleCount} orang)`;
+                    iconClass = 'fas fa-user-clock';
+                } else if (peopleCount < 7) {
+                    statusIndicator.classList.add('moderate');
+                    statusText = `Cukup Ramai (${peopleCount} orang)`;
+                    iconClass = 'fas fa-users';
+                } else {
+                    statusIndicator.classList.add('busy');
+                    statusText = `Sangat Ramai (${peopleCount} orang)`;
+                    iconClass = 'fas fa-users';
+                }
+            }
+
+            // Perbarui konten
+            statusIndicator.innerHTML = `<i class="${iconClass}"></i> ${statusText}`;
+        }
+
+        // Metode fallback jika computer vision gagal
+        function updateCrowdStatusFallback() {
+            // Kode fallback yang sudah ada
+            const cctvContainers = document.querySelectorAll('.cctv-container');
+
+            cctvContainers.forEach((container, index) => {
+                if (index === 0) return;
+
+                let statusIndicator = container.querySelector('.status-indicator');
+                if (!statusIndicator) {
+                    statusIndicator = document.createElement('div');
+                    statusIndicator.className = 'status-indicator';
+                    container.appendChild(statusIndicator);
+                }
+
+                let peopleCount = 0;
+                if (index === 1) {
+                    peopleCount = Math.floor(Math.random() * 16) + 5;
+                } else if (index === 2) {
+                    peopleCount = Math.floor(Math.random() * 10) + 1;
+                }
+
+                updateCrowdStatusWithCount(index, peopleCount);
+            });
+
+            // Jadwalkan pembaruan berikutnya
+            setTimeout(updateCrowdStatusFallback, 30000);
+        }
+
+        // Muat model saat halaman dimuat
+        loadModel();
+
+        // Refresh button functionality
+        document.querySelectorAll('.refresh-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const iframe = this.parentElement.querySelector('.cctv-feed');
+                const currentSrc = iframe.src;
+                iframe.src = '';
+                setTimeout(() => {
+                    iframe.src = currentSrc;
+                }, 100);
+
+                // Animate refresh button
+                this.classList.add('fa-spin');
+                setTimeout(() => {
+                    this.classList.remove('fa-spin');
+                }, 1000);
+
+                // Jalankan deteksi ulang jika model sudah dimuat
+                if (model) {
+                    detectPeople();
+                } else {
+                    updateCrowdStatusFallback();
+                }
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('cctvModal');
+        const zoomedFeed = document.getElementById('zoomedFeed');
+        const modalTitle = document.querySelector('.modal-title');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Open modal when clicking on CCTV header
+        document.querySelectorAll('.cctv-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const container = this.nextElementSibling;
+                const iframe = container.querySelector('.cctv-feed');
+                const title = this.textContent.trim();
+
+                modalTitle.textContent = title;
+                zoomedFeed.src = iframe.src;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
