@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Perkara</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #0a3d7a;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        .nav-link.active {
+            color: white !important;
+            border-bottom: 2px solid white;
+        }
+
+        .main-container {
+            padding: 20px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #0a3d7a;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            font-weight: bold;
+            padding: 15px 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(10, 61, 122, 0.05);
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .status-badge.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-badge.danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-badge.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-badge.primary {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .filter-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .donut-chart-container {
+            position: relative;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        .donut-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .donut-center-text h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .donut-center-text p {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #0a3d7a;
+        }
+
+        .stats-card {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .stats-card h5 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+
+        .stats-card p {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            color: #0a3d7a;
+        }
+
+        .update-info {
+            font-size: 12px;
+            color: #6c757d;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .ratio-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .ratio-item {
+            text-align: center;
+        }
+
+        .ratio-item h6 {
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: #6c757d;
+        }
+
+        .ratio-item p {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .ratio-item p.text-success {
+            color: #28a745;
+        }
+
+        .ratio-item p.text-danger {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">DASHBOARD PERKARA | PTSP.PA.Perk.org</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-chart-bar"></i> Statistik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-file-alt"></i> Laporan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Filter Section -->
+        <div class="row filter-section">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="filter-label">Pilih Bulan</label>
+                    <select class="form-control">
+                        <option>Januari</option>
+                        <option>Februari</option>
+                        <option>Maret</option>
+                        <option selected>April</option>
+                        <option>Mei</option>
+                        <option>Juni</option>
+                        <option>Juli</option>
+                        <option>Agustus</option>
+                        <option>September</option>
+                        <option>Oktober</option>
+                        <option>November</option>
+                        <option>Desember</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="filter-label">Pilih Tahun</label>
+                    <select class="form-control">
+                        <option>2023</option>
+                        <option selected>2024</option>
+                        <option>2025</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <div class="update-info">
+                    <i class="fas fa-sync-alt"></i> Update terakhir: 10.03.2024 06:27:37
+                </div>
+            </div>
+        </div>
+
+        <!-- Donut Charts Row -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie mr-2"></i> STATISTIK PERKARA E-COURT
+                    </div>
+                    <div class="card-body">
+                        <div class="donut-chart-container">
+                            <canvas id="perkaraDonutChart"></canvas>
+                            <div class="donut-center-text">
+                                <h3>Perkara Gugatan</h3>
+                                <p>45</p>
+                            </div>
+                        </div>
+                        <div class="ratio-info">
+                            <div class="ratio-item">
+                                <h6>PERKARA GUGATAN</h6>
+                                <p>49 Perkara</p>
+                            </div>
+                            <div class="ratio-item">
+                                <h6>PERKARA PERMOHONAN</h6>
+                                <p>11 Perkara</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie mr-2"></i> RASIO SERAH TERIMA PERKARA
+                    </div>
+                    <div class="card-body">
+                        <div class="donut-chart-container">
+                            <canvas id="rasioDonutChart"></canvas>
+                            <div class="donut-center-text">
+                                <h3>Perkara Gugatan</h3>
+                                <p>59</p>
+                            </div>
+                        </div>
+                        <div class="ratio-info">
+                            <div class="ratio-item">
+                                <h6>PERKARA GUGATAN</h6>
+                                <p>59 Perkara</p>
+                            </div>
+                            <div class="ratio-item">
+                                <h6>PERKARA PERMOHONAN</h6>
+                                <p>11 Perkara</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-table mr-2"></i> DATA PERKARA
+            </div>
+            <div class="card-body p-0">
+                <div class="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Perkara</th>
+                                <th>Sisa Bulan Lalu</th>
+                                <th>Masuk</th>
+                                <th>e-Court</th>
+                                <th>Putus</th>
+                                <th>Sisa Penyelesaian Perkara</th>
+                                <th>Sisa Perkara</th>
+                                <th>Minutasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>PERKARA GUGATAN</td>
+                                <td>43</td>
+                                <td>43</td>
+                                <td>43</td>
+                                <td>28</td>
+                                <td><span class="status-badge success">100%</span></td>
+                                <td>11</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>PERKARA PERMOHONAN</td>
+                                <td>12</td>
+                                <td>11</td>
+                                <td>11</td>
+                                <td>12</td>
+                                <td><span class="status-badge success">100%</span></td>
+                                <td>11</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>GUGATAN SEDERHANA</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><span class="status-badge info">0%</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>PERMOHONAN PEMBEBASAN BIAYA PERKARA</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><span class="status-badge info">0%</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>JINAYAT</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><span class="status-badge info">0%</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>PERMOHONAN EKSEKUSI JINAYAT</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><span class="status-badge info">0%</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>JINAYAT ANAK</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><span class="status-badge info">0%</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>PERMOHONAN EKSEKUSI</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><span class="status-badge info">0%</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>PERMOHONAN EKSEKUTORIAL</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><span class="status-badge info">0%</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-light font-weight-bold">
+                                <td colspan="2">Total</td>
+                                <td>55</td>
+                                <td>54</td>
+                                <td>54</td>
+                                <td>40</td>
+                                <td><span class="status-badge success">100%</span></td>
+                                <td>22</td>
+                                <td>38</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Stats Cards -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <h5>Total Perkara</h5>
+                    <p>109</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <h5>Perkara Selesai</h5>
+                    <p>40</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <h5>Perkara Dalam Proses</h5>
+                    <p>22</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card">
+                    <h5>Tingkat Penyelesaian</h5>
+                    <p>100%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-4 mb-2">
+            <a href="#" class="btn btn-primary">
+                <i class="fas fa-download mr-1"></i> Unduh Data
+            </a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Perkara Donut Chart
+            const perkaraCtx = document.getElementById('perkaraDonutChart').getContext('2d');
+            const perkaraChart = new Chart(perkaraCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Perkara Gugatan', 'Perkara Permohonan'],
+                    datasets: [{
+                        data: [45, 11],
+                        backgroundColor: [
+                            '#4CAF50',  // Green
+                            '#2196F3'   // Blue
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                boxWidth: 12,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + ' perkara';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Rasio Donut Chart
+            const rasioCtx = document.getElementById('rasioDonutChart').getContext('2d');
+            const rasioChart = new Chart(rasioCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Perkara Gugatan', 'Perkara Permohonan'],
+                    datasets: [{
+                        data: [59, 11],
+                        backgroundColor: [
+                            '#4CAF50',  // Green
+                            '#2196F3'   // Blue
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                boxWidth: 12,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + ' perkara';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
