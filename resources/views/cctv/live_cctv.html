@@ -185,7 +185,7 @@
                         Halaman Parkir
                     </div>
                     <div class="cctv-container">
-                        <img src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=883576768194955166649178" alt="CCTV Halaman Parkir" class="cctv-feed">
+                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=883576768194955166649178" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
                         <div class="live-indicator">
                             <div class="live-dot"></div> LIVE
                         </div>
@@ -205,7 +205,7 @@
                         Ruang Tunggu Sidang
                     </div>
                     <div class="cctv-container">
-                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=303329746330290962284656" alt="CCTV Ruang Tunggu" class="cctv-feed">
+                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=303329746330290962284656" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
                         <div class="live-indicator">
                             <div class="live-dot"></div> LIVE
                         </div>
@@ -225,7 +225,7 @@
                         PTSP
                     </div>
                     <div class="cctv-container">
-                        <img src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=846338227280923732711848" alt="CCTV PTSP" class="cctv-feed">
+                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=846338227280923732711848" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
                         <div class="live-indicator">
                             <div class="live-dot"></div> LIVE
                         </div>
@@ -274,11 +274,11 @@
         // Refresh button functionality
         document.querySelectorAll('.refresh-btn').forEach(button => {
             button.addEventListener('click', function() {
-                const img = this.parentElement.querySelector('.cctv-feed');
-                const currentSrc = img.src;
-                img.src = '';
+                const iframe = this.parentElement.querySelector('.cctv-feed');
+                const currentSrc = iframe.src;
+                iframe.src = '';
                 setTimeout(() => {
-                    img.src = currentSrc + '?t=' + new Date().getTime();
+                    iframe.src = currentSrc;
                 }, 100);
 
                 // Animate refresh button
