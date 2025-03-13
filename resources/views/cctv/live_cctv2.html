@@ -374,10 +374,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Tambahkan TensorFlow.js dan model COCO-SSD untuk deteksi objek -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
-
     <script>
         // Update timestamps
         function updateTimestamps() {
@@ -394,164 +390,58 @@
         // Update every second
         setInterval(updateTimestamps, 1000);
 
-        // Variabel untuk menyimpan model deteksi
-        let model;
-
-        // Muat model COCO-SSD saat halaman dimuat
-        async function loadModel() {
-            try {
-                model = await cocoSsd.load();
-                console.log("Model deteksi objek berhasil dimuat");
-                // Mulai deteksi setelah model dimuat
-                detectPeople();
-            } catch (error) {
-                console.error("Gagal memuat model:", error);
-                // Gunakan metode fallback jika model gagal dimuat
-                updateCrowdStatusFallback();
-            }
-        }
-
-        // Fungsi untuk mendeteksi orang dalam feed CCTV menggunakan Computer Vision
-        async function detectPeople() {
-            if (!model) return;
-
-            // Buat elemen canvas tersembunyi untuk memproses gambar
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            document.body.appendChild(canvas);
-            canvas.style.display = 'none';
-
-            // Fungsi untuk mendeteksi orang dalam satu frame CCTV
-            async function processFrame(cctvIndex) {
-                const container = document.querySelectorAll('.cctv-container')[cctvIndex];
-                if (!container) return 0;
-
-                // Dapatkan iframe
-                const iframe = container.querySelector('iframe');
-                if (!iframe) return 0;
-
-                try {
-                    // Ambil gambar dari iframe (catatan: ini hanya simulasi karena keterbatasan keamanan)
-                    // Dalam implementasi nyata, Anda perlu menggunakan server-side processing atau API khusus
-
-                    // Simulasi hasil deteksi untuk demo
-                    let peopleCount;
-                    if (cctvIndex === 1) { // Ruang Tunggu Sidang
-                        peopleCount = Math.floor(Math.random() * 16) + 5;
-                    } else if (cctvIndex === 2) { // PTSP
-                        peopleCount = Math.floor(Math.random() * 10) + 1;
-                    } else {
-                        peopleCount = 0;
-                    }
-
-                    // Perbarui status keramaian berdasarkan hasil deteksi
-                    updateCrowdStatusWithCount(cctvIndex, peopleCount);
-
-                    return peopleCount;
-                } catch (error) {
-                    console.error(`Error processing frame for CCTV ${cctvIndex}:`, error);
-                    return 0;
-                }
-            }
-
-            // Proses semua CCTV
-            for (let i = 1; i < 3; i++) { // Hanya proses Ruang Tunggu dan PTSP
-                await processFrame(i);
-            }
-
-            // Hapus canvas setelah selesai
-            canvas.remove();
-
-            // Jadwalkan deteksi berikutnya
-            setTimeout(detectPeople, 30000); // Deteksi setiap 30 detik
-        }
-
-        // Fungsi untuk memperbarui status keramaian berdasarkan jumlah orang yang terdeteksi
-        function updateCrowdStatusWithCount(cctvIndex, peopleCount) {
-            const container = document.querySelectorAll('.cctv-container')[cctvIndex];
-            if (!container) return;
-
-            // Periksa apakah indikator status sudah ada
-            let statusIndicator = container.querySelector('.status-indicator');
-            if (!statusIndicator) {
-                // Buat indikator status jika belum ada
-                statusIndicator = document.createElement('div');
-                statusIndicator.className = 'status-indicator';
-                container.appendChild(statusIndicator);
-            }
-
-            // Hapus semua kelas status yang ada
-            statusIndicator.classList.remove('quiet', 'moderate', 'busy');
-
-            // Perbarui status berdasarkan jumlah orang
-            let statusText = '';
-            let iconClass = '';
-
-            if (cctvIndex === 1) { // Ruang Tunggu Sidang
-                if (peopleCount < 4) {
-                    statusIndicator.classList.add('quiet');
-                    statusText = `Sepi (${peopleCount} orang)`;
-                    iconClass = 'fas fa-user-clock';
-                } else if (peopleCount < 7) {
-                    statusIndicator.classList.add('moderate');
-                    statusText = `Cukup Ramai (${peopleCount} orang)`;
-                    iconClass = 'fas fa-users';
-                } else {
-                    statusIndicator.classList.add('busy');
-                    statusText = `Sangat Ramai (${peopleCount} orang)`;
-                    iconClass = 'fas fa-users';
-                }
-            } else if (cctvIndex === 2) { // PTSP
-                if (peopleCount < 4) {
-                    statusIndicator.classList.add('quiet');
-                    statusText = `Sepi (${peopleCount} orang)`;
-                    iconClass = 'fas fa-user-clock';
-                } else if (peopleCount < 7) {
-                    statusIndicator.classList.add('moderate');
-                    statusText = `Cukup Ramai (${peopleCount} orang)`;
-                    iconClass = 'fas fa-users';
-                } else {
-                    statusIndicator.classList.add('busy');
-                    statusText = `Sangat Ramai (${peopleCount} orang)`;
-                    iconClass = 'fas fa-users';
-                }
-            }
-
-            // Perbarui konten
-            statusIndicator.innerHTML = `<i class="${iconClass}"></i> ${statusText}`;
-        }
-
-        // Metode fallback jika computer vision gagal
-        function updateCrowdStatusFallback() {
-            // Kode fallback yang sudah ada
+        // Function to update crowd status
+        function updateCrowdStatus() {
+            // Get all CCTV containers
             const cctvContainers = document.querySelectorAll('.cctv-container');
 
             cctvContainers.forEach((container, index) => {
+                // Skip the first container (Halaman Parkir) if it doesn't need crowd status
                 if (index === 0) return;
 
+                // Check if status indicator already exists
                 let statusIndicator = container.querySelector('.status-indicator');
                 if (!statusIndicator) {
+                    // Create status indicator if it doesn't exist
                     statusIndicator = document.createElement('div');
                     statusIndicator.className = 'status-indicator';
                     container.appendChild(statusIndicator);
                 }
 
-                let peopleCount = 0;
-                if (index === 1) {
-                    peopleCount = Math.floor(Math.random() * 16) + 5;
-                } else if (index === 2) {
-                    peopleCount = Math.floor(Math.random() * 10) + 1;
+                // Simulate crowd detection (in a real system, this would use image analysis)
+                const crowdLevel = Math.floor(Math.random() * 3); // 0: quiet, 1: moderate, 2: busy
+
+                // Remove all existing status classes
+                statusIndicator.classList.remove('quiet', 'moderate', 'busy');
+
+                // Update status based on crowd level
+                let statusText = '';
+                let iconClass = '';
+
+                if (crowdLevel === 0) {
+                    statusIndicator.classList.add('quiet');
+                    statusText = 'Sedang Sepi';
+                    iconClass = 'fas fa-user-clock';
+                } else if (crowdLevel === 1) {
+                    statusIndicator.classList.add('moderate');
+                    statusText = 'Cukup Ramai';
+                    iconClass = 'fas fa-users';
+                } else {
+                    statusIndicator.classList.add('busy');
+                    statusText = 'Sangat Ramai';
+                    iconClass = 'fas fa-users';
                 }
 
-                updateCrowdStatusWithCount(index, peopleCount);
+                // Update the content
+                statusIndicator.innerHTML = `<i class="${iconClass}"></i> ${statusText}`;
             });
-
-            // Jadwalkan pembaruan berikutnya
-            setTimeout(updateCrowdStatusFallback, 30000);
         }
 
-        // Muat model saat halaman dimuat
-        loadModel();
+        // Initial crowd status update
+        updateCrowdStatus();
+
+        // Update crowd status every 30 seconds
+        setInterval(updateCrowdStatus, 30000);
 
         // Refresh button functionality
         document.querySelectorAll('.refresh-btn').forEach(button => {
@@ -569,12 +459,8 @@
                     this.classList.remove('fa-spin');
                 }, 1000);
 
-                // Jalankan deteksi ulang jika model sudah dimuat
-                if (model) {
-                    detectPeople();
-                } else {
-                    updateCrowdStatusFallback();
-                }
+                // Also update crowd status when refreshing
+                updateCrowdStatus();
             });
         });
 
@@ -594,14 +480,14 @@
                 modalTitle.textContent = title;
                 zoomedFeed.src = iframe.src;
                 modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
             });
         });
 
         // Close modal
         closeModal.addEventListener('click', function() {
             modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
         });
 
         // Close modal when clicking outside of it
