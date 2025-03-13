@@ -390,57 +390,81 @@
         // Update every second
         setInterval(updateTimestamps, 1000);
 
-        // Function to update crowd status
+        // Fungsi untuk mendeteksi jumlah orang dan memperbarui status keramaian
         function updateCrowdStatus() {
-            // Get all CCTV containers
+            // Mendapatkan semua container CCTV
             const cctvContainers = document.querySelectorAll('.cctv-container');
 
             cctvContainers.forEach((container, index) => {
-                // Skip the first container (Halaman Parkir) if it doesn't need crowd status
+                // Lewati container pertama (Halaman Parkir) jika tidak memerlukan status keramaian
                 if (index === 0) return;
 
-                // Check if status indicator already exists
+                // Periksa apakah indikator status sudah ada
                 let statusIndicator = container.querySelector('.status-indicator');
                 if (!statusIndicator) {
-                    // Create status indicator if it doesn't exist
+                    // Buat indikator status jika belum ada
                     statusIndicator = document.createElement('div');
                     statusIndicator.className = 'status-indicator';
                     container.appendChild(statusIndicator);
                 }
 
-                // Simulate crowd detection (in a real system, this would use image analysis)
-                const crowdLevel = Math.floor(Math.random() * 3); // 0: quiet, 1: moderate, 2: busy
+                // Simulasi deteksi jumlah orang (dalam sistem nyata, ini akan menggunakan analisis gambar)
+                // Untuk Ruang Tunggu Sidang (index 1)
+                let peopleCount = 0;
+                if (index === 1) {
+                    // Simulasi jumlah orang di Ruang Tunggu Sidang (5-20 orang)
+                    peopleCount = Math.floor(Math.random() * 16) + 5;
+                } else if (index === 2) {
+                    // Simulasi jumlah orang di PTSP (1-10 orang)
+                    peopleCount = Math.floor(Math.random() * 10) + 1;
+                }
 
-                // Remove all existing status classes
+                // Hapus semua kelas status yang ada
                 statusIndicator.classList.remove('quiet', 'moderate', 'busy');
 
-                // Update status based on crowd level
+                // Perbarui status berdasarkan jumlah orang
                 let statusText = '';
                 let iconClass = '';
 
-                if (crowdLevel === 0) {
-                    statusIndicator.classList.add('quiet');
-                    statusText = 'Sedang Sepi';
-                    iconClass = 'fas fa-user-clock';
-                } else if (crowdLevel === 1) {
-                    statusIndicator.classList.add('moderate');
-                    statusText = 'Cukup Ramai';
-                    iconClass = 'fas fa-users';
-                } else {
-                    statusIndicator.classList.add('busy');
-                    statusText = 'Sangat Ramai';
-                    iconClass = 'fas fa-users';
+                if (index === 1) { // Ruang Tunggu Sidang
+                    if (peopleCount < 8) {
+                        statusIndicator.classList.add('quiet');
+                        statusText = `Sepi (${peopleCount} orang)`;
+                        iconClass = 'fas fa-user-clock';
+                    } else if (peopleCount < 15) {
+                        statusIndicator.classList.add('moderate');
+                        statusText = `Cukup Ramai (${peopleCount} orang)`;
+                        iconClass = 'fas fa-users';
+                    } else {
+                        statusIndicator.classList.add('busy');
+                        statusText = `Sangat Ramai (${peopleCount} orang)`;
+                        iconClass = 'fas fa-users';
+                    }
+                } else { // PTSP
+                    if (peopleCount < 4) {
+                        statusIndicator.classList.add('quiet');
+                        statusText = `Sepi (${peopleCount} orang)`;
+                        iconClass = 'fas fa-user-clock';
+                    } else if (peopleCount < 7) {
+                        statusIndicator.classList.add('moderate');
+                        statusText = `Cukup Ramai (${peopleCount} orang)`;
+                        iconClass = 'fas fa-users';
+                    } else {
+                        statusIndicator.classList.add('busy');
+                        statusText = `Sangat Ramai (${peopleCount} orang)`;
+                        iconClass = 'fas fa-users';
+                    }
                 }
 
-                // Update the content
+                // Perbarui konten
                 statusIndicator.innerHTML = `<i class="${iconClass}"></i> ${statusText}`;
             });
         }
 
-        // Initial crowd status update
+        // Pembaruan status keramaian awal
         updateCrowdStatus();
 
-        // Update crowd status every 30 seconds
+        // Perbarui status keramaian setiap 30 detik
         setInterval(updateCrowdStatus, 30000);
 
         // Refresh button functionality
@@ -459,51 +483,9 @@
                     this.classList.remove('fa-spin');
                 }, 1000);
 
-                // Also update crowd status when refreshing
+                // Juga perbarui status keramaian saat menyegarkan
                 updateCrowdStatus();
             });
-        });
-
-        // Modal functionality
-        const modal = document.getElementById('cctvModal');
-        const zoomedFeed = document.getElementById('zoomedFeed');
-        const modalTitle = document.querySelector('.modal-title');
-        const closeModal = document.querySelector('.close-modal');
-
-        // Open modal when clicking on CCTV header
-        document.querySelectorAll('.cctv-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const container = this.nextElementSibling;
-                const iframe = container.querySelector('.cctv-feed');
-                const title = this.textContent.trim();
-
-                modalTitle.textContent = title;
-                zoomedFeed.src = iframe.src;
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-            });
-        });
-
-        // Close modal
-        closeModal.addEventListener('click', function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
-        });
-
-        // Close modal when clicking outside of it
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Close modal with Escape key
-        window.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
         });
     </script>
 </body>
