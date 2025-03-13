@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live CCTV Pengadilan Agama Amuntai Kelas IB</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            max-width: 120px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .title {
+            color: #0066cc;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cctv-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+        }
+
+        .cctv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .cctv-header {
+            background-color: #0066cc;
+            color: white;
+            padding: 12px 15px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .cctv-feed {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .visitor-counter {
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin-top: 30px;
+        }
+
+        .counter-item {
+            display: inline-block;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        .counter-value {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .refresh-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255,255,255,0.7);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0066cc;
+            transition: all 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        .cctv-container {
+            position: relative;
+        }
+
+        .live-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(220, 53, 69, 0.8);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+        }
+
+        .timestamp {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://cctv.pa-amuntai.go.id/assets/dist/img/Logo%20PA%20Amuntai%20-%20Trans.png?%3E" alt="Logo Pengadilan Agama Amuntai" class="logo">
+            <h1 class="title">Live CCTV PENGADILAN AGAMA AMUNTAI KELAS IB</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card cctv-card">
+                    <div class="cctv-header">
+                        Halaman Parkir
+                    </div>
+                    <div class="cctv-container">
+                        <img src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=883576768194955166649178" alt="CCTV Halaman Parkir" class="cctv-feed">
+                        <div class="live-indicator">
+                            <div class="live-dot"></div> LIVE
+                        </div>
+                        <button class="refresh-btn" title="Refresh feed">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <div class="timestamp">
+                            <i class="far fa-clock"></i> <span id="timestamp1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card cctv-card">
+                    <div class="cctv-header">
+                        Ruang Tunggu Sidang
+                    </div>
+                    <div class="cctv-container">
+                        <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=303329746330290962284656" alt="CCTV Ruang Tunggu" class="cctv-feed">
+                        <div class="live-indicator">
+                            <div class="live-dot"></div> LIVE
+                        </div>
+                        <button class="refresh-btn" title="Refresh feed">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <div class="timestamp">
+                            <i class="far fa-clock"></i> <span id="timestamp2"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card cctv-card">
+                    <div class="cctv-header">
+                        PTSP
+                    </div>
+                    <div class="cctv-container">
+                        <img src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=846338227280923732711848" alt="CCTV PTSP" class="cctv-feed">
+                        <div class="live-indicator">
+                            <div class="live-dot"></div> LIVE
+                        </div>
+                        <button class="refresh-btn" title="Refresh feed">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <div class="timestamp">
+                            <i class="far fa-clock"></i> <span id="timestamp3"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="visitor-counter">
+            <div class="counter-item">Pengunjung Hari Ini: <span class="counter-value">16</span></div>
+            <div class="counter-item">Bulan Ini: <span class="counter-value">539</span></div>
+            <div class="counter-item">Total: <span class="counter-value">2229</span></div>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 Pengadilan Agama Amuntai Kelas IB. All Rights Reserved.
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Update timestamps
+        function updateTimestamps() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('timestamp1').textContent = timeString;
+            document.getElementById('timestamp2').textContent = timeString;
+            document.getElementById('timestamp3').textContent = timeString;
+        }
+
+        // Initial update
+        updateTimestamps();
+
+        // Update every second
+        setInterval(updateTimestamps, 1000);
+
+        // Refresh button functionality
+        document.querySelectorAll('.refresh-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const img = this.parentElement.querySelector('.cctv-feed');
+                const currentSrc = img.src;
+                img.src = '';
+                setTimeout(() => {
+                    img.src = currentSrc + '?t=' + new Date().getTime();
+                }, 100);
+
+                // Animate refresh button
+                this.classList.add('fa-spin');
+                setTimeout(() => {
+                    this.classList.remove('fa-spin');
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
