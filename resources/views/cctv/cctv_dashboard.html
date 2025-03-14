@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCTV Dashboard Pengadilan Agama Amuntai</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-section img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .breadcrumb {
+            background: none;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .notification {
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4d4f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .user-role {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .filter-bar {
+            background-color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cctv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .cctv-card {
+            background-color: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .cctv-header {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cctv-title {
+            font-weight: 500;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .cctv-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cctv-feed {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .cctv-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            opacity: 0.7;
+        }
+
+        .cctv-controls:hover {
+            opacity: 1;
+        }
+
+        .control-button {
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .control-button:hover {
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .progress-bar {
+            height: 3px;
+            background-color: rgba(255,255,255,0.3);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #1890ff;
+            width: 50%;
+        }
+
+        .dropdown-select {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .dropdown-select:focus {
+            outline: none;
+            border-color: #1890ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo-section">
+            <img src="https://cctv.pa-amuntai.go.id/assets/dist/img/Logo%20PA%20Amuntai%20-%20Trans.png" alt="Logo PA Amuntai">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">CCTV</a></li>
+                    <li class="breadcrumb-item"><a href="#">PA. AMUNTAI</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">HUBUNGI PIMPINAN</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="user-section">
+            <div class="notification">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">2</span>
+            </div>
+            <div class="user-info">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="user-avatar">
+                <div>
+                    <div class="user-name">Windy Sakriani, S.Kom.</div>
+                    <div class="user-role">Pengadilan Agama Amuntai</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="filter-bar">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <label for="baris">Tampilkan Baris:</label>
+                    <select id="baris" class="dropdown-select">
+                        <option value="3">3 Baris</option>
+                        <option value="6">6 Baris</option>
+                        <option value="9">9 Baris</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="cctv-grid">
+            <!-- PTSP -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">PTSP</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=846338227280923732711848" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HALAMAN APEL -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">HALAMAN APEL</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=883576768194955166649178" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRONT DESK -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">FRONT DESK</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=303329746330290962284656" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUANG TUNGGU SIDANG -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">RUANG TUNGGU SIDANG</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=303329746330290962284656" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUANG KEPANITERAAN -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">RUANG KEPANITERAAN</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=846338227280923732711848" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUANG KESEKRETARIATAN -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">RUANG KESEKRETARIATAN</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=883576768194955166649178" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUANG SIDANG UTAMA -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">RUANG SIDANG UTAMA</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=303329746330290962284656" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUANG SIDANG II -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">RUANG SIDANG II</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=846338227280923732711848" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUANG MEDIASI -->
+            <div class="cctv-card">
+                <div class="cctv-header">
+                    <h5 class="cctv-title">RUANG MEDIASI</h5>
+                    <div class="cctv-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                </div>
+                <div class="cctv-container">
+                    <iframe src="https://paamuntai.cctvbadilag2.my.id/402556PAAMUNTAI/play.html?name=883576768194955166649178" class="cctv-feed" frameborder="0" allowfullscreen></iframe>
+                    <div class="cctv-controls">
+                        <button class="control-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <button class="control-button">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for fullscreen view -->
+    <div class="modal fade" id="fullscreenModal" tabindex="-1" role="dialog" aria-labelledby="fullscreenModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fullscreenModalLabel">CCTV View</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="fullscreenFeed" class="w-100" style="height: 70vh;" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Handle row display selection
+        document.getElementById('baris').addEventListener('change', function() {
+            const rows = parseInt(this.value);
+            const grid = document.querySelector('.cctv-grid');
+
+            // Show all cards first
+            document.querySelectorAll('.cctv-card').forEach(card => {
+                card.style.display = 'block';
+            });
+
+            // Calculate how many cards to show based on rows (3 cards per row)
+            const cardsToShow = rows * 3;
+            const cards = document.querySelectorAll('.cctv-card');
+
+            // Hide cards beyond the selected number of rows
+            for (let i = cardsToShow; i < cards.length; i++) {
+                cards[i].style.display = 'none';
+            }
+        });
+
+        // Handle expand button clicks
+        document.querySelectorAll('.fa-expand').forEach(button => {
+            button.parentElement.addEventListener('click', function() {
+                const card = this.closest('.cctv-card');
+                const title = card.querySelector('.cctv-title').textContent;
+                const iframe = card.querySelector('iframe');
+                const src = iframe.src;
+
+                // Set modal title and iframe source
+                document.getElementById('fullscreenModalLabel').textContent = title;
+                document.getElementById('fullscreenFeed').src = src;
+
+                // Show modal
+                $('#fullscreenModal').modal('show');
+            });
+        });
+
+        // Handle play/pause button clicks
+        document.querySelectorAll('.fa-play').forEach(button => {
+            button.parentElement.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-play')) {
+                    icon.classList.remove('fa-play');
+                    icon.classList.add('fa-pause');
+                } else {
+                    icon.classList.remove('fa-pause');
+                    icon.classList.add('fa-play');
+                }
+            });
+        });
+
+        // Handle mute/unmute button clicks
+        document.querySelectorAll('.fa-volume-mute').forEach(button => {
+            button.parentElement.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-volume-mute')) {
+                    icon.classList.remove('fa-volume-mute');
+                    icon.classList.add('fa-volume-up');
+                } else {
+                    icon.classList.remove('fa-volume-up');
+                    icon.classList.add('fa-volume-mute');
+                }
+            });
+        });
+
+        // Simulate progress bar movement
+        function updateProgressBars() {
+            document.querySelectorAll('.progress').forEach(bar => {
+                let width = parseFloat(bar.style.width) || 50;
+                width += 0.1;
+                if (width > 100) width = 0;
+                bar.style.width = width + '%';
+            });
+
+            setTimeout(updateProgressBars, 100);
+        }
+
+        // Start progress bar animation
+        updateProgressBars();
+    </script>
+</body>
+</html>
